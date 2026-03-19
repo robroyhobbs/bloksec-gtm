@@ -1,0 +1,908 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlokSec ROI Calculator — Passwordless Authentication Savings</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --purple-dark: #1a0a2e;
+        --purple-deep: #311043;
+        --purple-mid: #6b21a8;
+        --purple-brand: #a855f7;
+        --purple-light: #c084fc;
+        --purple-pale: #f3e8ff;
+        --green-accent: #22c55e;
+        --green-bg: #f0fdf4;
+        --orange-accent: #f59e0b;
+        --red-accent: #ef4444;
+        --white: #ffffff;
+        --gray-50: #f9fafb;
+        --gray-100: #f3f4f6;
+        --gray-200: #e5e7eb;
+        --gray-300: #d1d5db;
+        --gray-500: #6b7280;
+        --gray-700: #374151;
+        --gray-900: #111827;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        background: var(--gray-50);
+        color: var(--gray-900);
+        line-height: 1.6;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Poppins", sans-serif;
+      }
+
+      .header {
+        background: linear-gradient(
+          135deg,
+          var(--purple-dark),
+          var(--purple-deep)
+        );
+        padding: 40px 0;
+        text-align: center;
+        color: var(--white);
+      }
+
+      .header h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .header p {
+        font-size: 1.1rem;
+        opacity: 0.85;
+        font-weight: 300;
+      }
+
+      .logo-text {
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--purple-brand);
+        margin-bottom: 12px;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 40px 24px;
+      }
+
+      .calculator-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+
+      @media (max-width: 768px) {
+        .calculator-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        background: var(--white);
+        border-radius: 12px;
+        padding: 32px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--gray-200);
+      }
+
+      .card h2 {
+        font-size: 1.25rem;
+        margin-bottom: 24px;
+        color: var(--purple-deep);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .card h2 .icon {
+        width: 32px;
+        height: 32px;
+        background: var(--purple-pale);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--gray-700);
+        margin-bottom: 6px;
+      }
+
+      .form-group .hint {
+        font-size: 0.75rem;
+        color: var(--gray-500);
+        margin-top: 4px;
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid var(--gray-300);
+        border-radius: 8px;
+        font-size: 1rem;
+        font-family: "Inter", sans-serif;
+        color: var(--gray-900);
+        transition: border-color 0.2s;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: var(--purple-brand);
+        box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+      }
+
+      .industry-presets {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+
+      .preset-btn {
+        padding: 6px 14px;
+        border: 1px solid var(--gray-300);
+        border-radius: 20px;
+        background: var(--white);
+        color: var(--gray-700);
+        font-size: 0.813rem;
+        font-family: "Inter", sans-serif;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .preset-btn:hover {
+        border-color: var(--purple-brand);
+        color: var(--purple-mid);
+      }
+
+      .preset-btn.active {
+        background: var(--purple-brand);
+        color: var(--white);
+        border-color: var(--purple-brand);
+      }
+
+      .results-card {
+        background: linear-gradient(
+          135deg,
+          var(--purple-dark),
+          var(--purple-deep)
+        );
+        color: var(--white);
+      }
+
+      .results-card h2 {
+        color: var(--purple-light);
+      }
+
+      .result-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .result-row:last-child {
+        border-bottom: none;
+      }
+
+      .result-label {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.75);
+      }
+
+      .result-value {
+        font-family: "Poppins", sans-serif;
+        font-size: 1.125rem;
+        font-weight: 600;
+      }
+
+      .result-value.savings {
+        color: var(--green-accent);
+      }
+
+      .result-value.cost {
+        color: var(--orange-accent);
+      }
+
+      .big-number {
+        text-align: center;
+        padding: 28px 0;
+        margin: 20px 0;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        border: 1px solid rgba(168, 85, 247, 0.3);
+      }
+
+      .big-number .label {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.6);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 4px;
+      }
+
+      .big-number .value {
+        font-family: "Poppins", sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--green-accent);
+      }
+
+      .big-number .sub {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.5);
+        margin-top: 4px;
+      }
+
+      .payback-bar {
+        margin-top: 20px;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+      }
+
+      .payback-bar .label {
+        font-size: 0.813rem;
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 8px;
+      }
+
+      .bar-track {
+        height: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--green-accent), #86efac);
+        border-radius: 4px;
+        transition: width 0.6s ease;
+      }
+
+      .payback-text {
+        font-size: 0.875rem;
+        margin-top: 8px;
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      .compliance-section {
+        margin-top: 32px;
+      }
+
+      .compliance-section h3 {
+        font-size: 1rem;
+        margin-bottom: 12px;
+        color: var(--purple-light);
+      }
+
+      .compliance-tag {
+        display: inline-block;
+        padding: 4px 12px;
+        margin: 4px;
+        border-radius: 16px;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+
+      .compliance-tag.active {
+        background: rgba(34, 197, 94, 0.15);
+        color: var(--green-accent);
+        border: 1px solid rgba(34, 197, 94, 0.3);
+      }
+
+      .compliance-tag.inactive {
+        background: rgba(255, 255, 255, 0.05);
+        color: rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .assumptions {
+        margin-top: 32px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .assumptions h4 {
+        font-size: 0.813rem;
+        color: rgba(255, 255, 255, 0.5);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+      }
+
+      .assumptions p {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.4);
+        line-height: 1.6;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 40px 24px;
+        color: var(--gray-500);
+        font-size: 0.875rem;
+      }
+
+      .footer a {
+        color: var(--purple-brand);
+        text-decoration: none;
+      }
+
+      .print-section {
+        text-align: center;
+        margin-top: 24px;
+      }
+
+      .print-btn {
+        padding: 10px 24px;
+        background: var(--purple-brand);
+        color: var(--white);
+        border: none;
+        border-radius: 8px;
+        font-family: "Inter", sans-serif;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .print-btn:hover {
+        background: var(--purple-mid);
+      }
+
+      @media print {
+        .header {
+          padding: 20px 0;
+        }
+        .container {
+          padding: 20px;
+        }
+        .card {
+          break-inside: avoid;
+        }
+        .print-btn {
+          display: none;
+        }
+        .preset-btn {
+          display: none;
+        }
+        body {
+          background: white;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="logo-text">BlokSec</div>
+      <h1>Passwordless Authentication ROI Calculator</h1>
+      <p>See what eliminating passwords saves your organization</p>
+    </div>
+
+    <div class="container">
+      <div class="calculator-grid">
+        <!-- INPUT SECTION -->
+        <div class="card">
+          <h2><span class="icon">1</span> Your Organization</h2>
+
+          <div class="industry-presets">
+            <button
+              class="preset-btn"
+              onclick="applyPreset('manufacturing', event)"
+            >
+              Manufacturing
+            </button>
+            <button class="preset-btn" onclick="applyPreset('retail', event)">
+              Retail
+            </button>
+            <button
+              class="preset-btn"
+              onclick="applyPreset('warehouse', event)"
+            >
+              Warehousing
+            </button>
+            <button class="preset-btn" onclick="applyPreset('food', event)">
+              Food Processing
+            </button>
+            <button class="preset-btn" onclick="applyPreset('energy', event)">
+              Energy
+            </button>
+            <button class="preset-btn" onclick="applyPreset('custom', event)">
+              Custom
+            </button>
+          </div>
+
+          <div class="form-group">
+            <label for="industry">Industry</label>
+            <select id="industry" onchange="calculate()">
+              <option value="manufacturing">Manufacturing</option>
+              <option value="retail">Retail</option>
+              <option value="warehouse">Warehousing / Logistics</option>
+              <option value="food">Food Processing</option>
+              <option value="energy">Energy / Utilities</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="totalWorkers">Total Frontline / Floor Workers</label>
+            <input
+              type="number"
+              id="totalWorkers"
+              value="200"
+              min="10"
+              max="100000"
+              onchange="calculate()"
+              oninput="calculate()"
+            />
+            <div class="hint">
+              Workers who use shared terminals or need to authenticate without a
+              personal device
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="turnoverRate">Annual Turnover Rate (%)</label>
+            <input
+              type="number"
+              id="turnoverRate"
+              value="60"
+              min="0"
+              max="300"
+              onchange="calculate()"
+              oninput="calculate()"
+            />
+            <div class="hint">
+              Manufacturing avg: 40-60% | Retail avg: 100-150%
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="resetsPerUser">Password Resets per User per Year</label>
+            <input
+              type="number"
+              id="resetsPerUser"
+              value="6"
+              min="0"
+              max="52"
+              onchange="calculate()"
+              oninput="calculate()"
+            />
+            <div class="hint">
+              Industry average: 6-12 per year for frontline workers
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="resetCost">Cost per Password Reset ($)</label>
+            <input
+              type="number"
+              id="resetCost"
+              value="70"
+              min="10"
+              max="200"
+              onchange="calculate()"
+              oninput="calculate()"
+            />
+            <div class="hint">
+              Forrester benchmark: $70 (includes IT time + worker downtime)
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="locations">Number of Locations</label>
+            <input
+              type="number"
+              id="locations"
+              value="3"
+              min="1"
+              max="1000"
+              onchange="calculate()"
+              oninput="calculate()"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="avgWage">Average Hourly Wage ($)</label>
+            <input
+              type="number"
+              id="avgWage"
+              value="22"
+              min="10"
+              max="100"
+              onchange="calculate()"
+              oninput="calculate()"
+            />
+            <div class="hint">
+              Used to calculate lost productivity during lockouts
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="bloksecPrice">BlokSec Price per User/Month ($)</label>
+            <input
+              type="number"
+              id="bloksecPrice"
+              value="4"
+              min="1"
+              max="20"
+              step="0.5"
+              onchange="calculate()"
+              oninput="calculate()"
+            />
+            <div class="hint">Typical range: $3-5/user/month</div>
+          </div>
+        </div>
+
+        <!-- RESULTS SECTION -->
+        <div class="card results-card" id="resultsCard">
+          <h2>
+            <span class="icon" style="background: rgba(255, 255, 255, 0.1)"
+              >$</span
+            >
+            Your Savings
+          </h2>
+
+          <div class="big-number">
+            <div class="label">Annual Net Savings</div>
+            <div class="value" id="netSavings">$74,400</div>
+            <div class="sub" id="roiPercent">769% ROI</div>
+          </div>
+
+          <div class="result-row">
+            <span class="result-label">Password Reset Costs Eliminated</span>
+            <span class="result-value savings" id="resetSavings">$84,000</span>
+          </div>
+
+          <div class="result-row">
+            <span class="result-label"
+              >Productivity Recovered (lockout time)</span
+            >
+            <span class="result-value savings" id="productivitySavings"
+              >$13,200</span
+            >
+          </div>
+
+          <div class="result-row">
+            <span class="result-label">Onboarding Cost Reduction</span>
+            <span class="result-value savings" id="onboardingSavings"
+              >$3,600</span
+            >
+          </div>
+
+          <div class="result-row">
+            <span
+              class="result-label"
+              style="font-weight: 600; color: rgba(255, 255, 255, 0.9)"
+              >Total Annual Savings</span
+            >
+            <span
+              class="result-value savings"
+              id="totalSavings"
+              style="font-size: 1.25rem"
+              >$100,800</span
+            >
+          </div>
+
+          <div class="result-row">
+            <span class="result-label">BlokSec Annual Cost</span>
+            <span class="result-value cost" id="bloksecCost">-$9,600</span>
+          </div>
+
+          <div class="payback-bar">
+            <div class="label">Payback Period</div>
+            <div class="bar-track">
+              <div class="bar-fill" id="paybackBar" style="width: 10%"></div>
+            </div>
+            <div class="payback-text" id="paybackText">
+              Pays for itself in 1.1 months
+            </div>
+          </div>
+
+          <div class="result-row" style="margin-top: 16px">
+            <span class="result-label">Help Desk Tickets Eliminated/Year</span>
+            <span
+              class="result-value"
+              id="ticketsEliminated"
+              style="color: var(--purple-light)"
+              >1,200</span
+            >
+          </div>
+
+          <div class="result-row">
+            <span class="result-label">Hours Saved for IT/Year</span>
+            <span
+              class="result-value"
+              id="hoursSaved"
+              style="color: var(--purple-light)"
+              >400</span
+            >
+          </div>
+
+          <div class="compliance-section">
+            <h3>Compliance Coverage</h3>
+            <div id="complianceTags"></div>
+          </div>
+
+          <div class="assumptions">
+            <h4>Assumptions</h4>
+            <p id="assumptionsText">
+              Password reset cost based on Forrester Research benchmark
+              ($70/reset including IT labor + user downtime). Productivity loss
+              assumes 15 minutes average lockout per reset event. Onboarding
+              savings assume 30 minutes saved per new hire on credential setup.
+              Help desk time estimated at 20 minutes per ticket.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="print-section">
+        <button class="print-btn" onclick="window.print()">
+          Print / Save as PDF
+        </button>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>
+        BlokSec ROI Calculator — For discussion purposes. Actual savings vary by
+        organization.
+      </p>
+      <p>
+        Data sources: Forrester Research, Gartner, Verizon DBIR, IBM Cost of a
+        Data Breach Report
+      </p>
+    </div>
+
+    <script>
+      const presets = {
+        manufacturing: {
+          industry: "manufacturing",
+          workers: 200,
+          turnover: 50,
+          resets: 6,
+          wage: 24,
+          locations: 3,
+        },
+        retail: {
+          industry: "retail",
+          workers: 300,
+          turnover: 120,
+          resets: 8,
+          wage: 17,
+          locations: 8,
+        },
+        warehouse: {
+          industry: "warehouse",
+          workers: 150,
+          turnover: 80,
+          resets: 7,
+          wage: 20,
+          locations: 2,
+        },
+        food: {
+          industry: "food",
+          workers: 250,
+          turnover: 60,
+          resets: 6,
+          wage: 19,
+          locations: 2,
+        },
+        energy: {
+          industry: "energy",
+          workers: 100,
+          turnover: 20,
+          resets: 5,
+          wage: 35,
+          locations: 5,
+        },
+        custom: {
+          industry: "other",
+          workers: 200,
+          turnover: 60,
+          resets: 6,
+          wage: 22,
+          locations: 3,
+        },
+      };
+
+      const complianceMap = {
+        manufacturing: [
+          "FDA 21 CFR Part 11",
+          "SOC 2",
+          "NIST 800-63B",
+          "CMMC 2.0",
+        ],
+        retail: ["PCI DSS 4.0", "SOC 2", "NIST 800-63B", "State Privacy Laws"],
+        warehouse: ["SOC 2", "NIST 800-63B", "Customer Audit Requirements"],
+        food: ["FDA FSMA", "FDA 21 CFR Part 11", "SOC 2", "NIST 800-63B"],
+        energy: [
+          "NERC CIP",
+          "SOC 2",
+          "NIST 800-63B",
+          "TSA Cybersecurity Directives",
+        ],
+        other: ["SOC 2", "NIST 800-63B"],
+      };
+
+      const allCompliance = [
+        "PCI DSS 4.0",
+        "FDA 21 CFR Part 11",
+        "SOC 2",
+        "NIST 800-63B",
+        "NERC CIP",
+        "CMMC 2.0",
+        "FDA FSMA",
+        "TSA Cybersecurity Directives",
+        "State Privacy Laws",
+        "Customer Audit Requirements",
+      ];
+
+      function applyPreset(key, e) {
+        const p = presets[key];
+        document.getElementById("industry").value = p.industry;
+        document.getElementById("totalWorkers").value = p.workers;
+        document.getElementById("turnoverRate").value = p.turnover;
+        document.getElementById("resetsPerUser").value = p.resets;
+        document.getElementById("avgWage").value = p.wage;
+        document.getElementById("locations").value = p.locations;
+
+        document
+          .querySelectorAll(".preset-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        if (e && e.target) e.target.classList.add("active");
+
+        calculate();
+      }
+
+      function formatCurrency(n) {
+        if (n < 0) return "-$" + Math.abs(Math.round(n)).toLocaleString();
+        return "$" + Math.round(n).toLocaleString();
+      }
+
+      function calculate() {
+        const workers =
+          parseInt(document.getElementById("totalWorkers").value) || 0;
+        const turnover =
+          parseInt(document.getElementById("turnoverRate").value) || 0;
+        const resets =
+          parseInt(document.getElementById("resetsPerUser").value) || 0;
+        const resetCost =
+          parseInt(document.getElementById("resetCost").value) || 0;
+        const locations =
+          parseInt(document.getElementById("locations").value) || 0;
+        const wage = parseFloat(document.getElementById("avgWage").value) || 0;
+        const price =
+          parseFloat(document.getElementById("bloksecPrice").value) || 0;
+        const industry = document.getElementById("industry").value;
+
+        // Password reset savings
+        const totalResets = workers * resets;
+        const resetSavings = totalResets * resetCost;
+
+        // Productivity savings (15 min per lockout event, ~1.5 lockouts per reset)
+        const lockoutEvents = totalResets * 1.5;
+        const productivityHours = (lockoutEvents * 15) / 60;
+        const productivitySavings = productivityHours * wage;
+
+        // Onboarding savings (30 min saved per new hire)
+        const newHires = workers * (turnover / 100);
+        const onboardingSavings = ((newHires * 30) / 60) * wage;
+
+        // Total savings
+        const totalSavings =
+          resetSavings + productivitySavings + onboardingSavings;
+
+        // BlokSec cost
+        const annualCost = workers * price * 12;
+
+        // Net savings
+        const netSavings = totalSavings - annualCost;
+
+        // ROI
+        const roi = annualCost > 0 ? (netSavings / annualCost) * 100 : 0;
+
+        // Payback period (months)
+        const monthlySavings = totalSavings / 12;
+        const paybackMonths =
+          monthlySavings > 0 ? annualCost / monthlySavings : 0;
+
+        // Help desk metrics
+        const ticketsEliminated = totalResets;
+        const hoursSaved = Math.round((totalResets * 20) / 60); // 20 min per ticket
+
+        // Update DOM
+        document.getElementById("resetSavings").textContent =
+          formatCurrency(resetSavings);
+        document.getElementById("productivitySavings").textContent =
+          formatCurrency(productivitySavings);
+        document.getElementById("onboardingSavings").textContent =
+          formatCurrency(onboardingSavings);
+        document.getElementById("totalSavings").textContent =
+          formatCurrency(totalSavings);
+        document.getElementById("bloksecCost").textContent =
+          formatCurrency(-annualCost);
+        document.getElementById("netSavings").textContent =
+          formatCurrency(netSavings);
+        document.getElementById("roiPercent").textContent =
+          Math.round(roi) + "% ROI";
+        document.getElementById("ticketsEliminated").textContent =
+          ticketsEliminated.toLocaleString();
+        document.getElementById("hoursSaved").textContent =
+          hoursSaved.toLocaleString();
+
+        // Payback bar
+        const paybackPct = Math.min(
+          100,
+          Math.max(5, (1 / Math.max(paybackMonths, 0.1)) * 100),
+        );
+        document.getElementById("paybackBar").style.width = paybackPct + "%";
+        if (paybackMonths < 1) {
+          document.getElementById("paybackText").textContent =
+            "Pays for itself in less than 1 month";
+        } else {
+          document.getElementById("paybackText").textContent =
+            "Pays for itself in " + paybackMonths.toFixed(1) + " months";
+        }
+
+        // Compliance tags
+        const activeCompliance =
+          complianceMap[industry] || complianceMap["other"];
+        let tagsHtml = "";
+        allCompliance.forEach((tag) => {
+          if (activeCompliance.includes(tag)) {
+            tagsHtml +=
+              '<span class="compliance-tag active">' + tag + "</span>";
+          } else {
+            tagsHtml +=
+              '<span class="compliance-tag inactive">' + tag + "</span>";
+          }
+        });
+        document.getElementById("complianceTags").innerHTML = tagsHtml;
+      }
+
+      // Initial calculation
+      calculate();
+    </script>
+  </body>
+</html>

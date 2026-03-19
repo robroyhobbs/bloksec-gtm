@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlokSec Technical Architecture</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --purple-dark: #1a0a2e;
+        --purple-deep: #311043;
+        --purple-mid: #6b21a8;
+        --purple-brand: #a855f7;
+        --purple-light: #c084fc;
+        --purple-pale: #ede6f2;
+        --orange-accent: #f59e0b;
+        --green-accent: #22c55e;
+        --red-accent: #ef4444;
+        --blue-accent: #2563eb;
+        --cyan-accent: #06b6d4;
+        --white: #ffffff;
+        --gray-100: #f8f9fa;
+        --gray-200: #e9ecef;
+        --gray-300: #dee2e6;
+        --gray-500: #6b7280;
+        --gray-700: #374151;
+        --gray-900: #111827;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        background: var(--gray-900);
+        color: var(--white);
+        overflow-x: hidden;
+      }
+
+      h1, h2, h3, h4, h5 {
+        font-family: "Poppins", sans-serif;
+      }
+
+      .mono {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      /* ===== SLIDE SYSTEM ===== */
+      .slide {
+        min-height: 100vh;
+        padding: 60px 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        border-bottom: 1px solid rgba(168, 85, 247, 0.1);
+      }
+
+      .slide-number {
+        position: absolute;
+        top: 30px;
+        right: 40px;
+        font-size: 14px;
+        color: var(--purple-light);
+        opacity: 0.5;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .slide-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: var(--purple-brand);
+        margin-bottom: 16px;
+        font-weight: 600;
+      }
+
+      .slide h2 {
+        font-size: 42px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        line-height: 1.15;
+      }
+
+      .slide .subtitle {
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.6);
+        max-width: 700px;
+        line-height: 1.6;
+        margin-bottom: 40px;
+      }
+
+      /* ===== TITLE SLIDE ===== */
+      .slide-title {
+        background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple-deep) 50%, #1a0a2e 100%);
+        text-align: center;
+        align-items: center;
+      }
+
+      .slide-title .logo {
+        font-family: "Poppins", sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--purple-brand);
+        margin-bottom: 32px;
+      }
+
+      .slide-title h1 {
+        font-size: 56px;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--purple-light), var(--white));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 16px;
+        line-height: 1.1;
+      }
+
+      .slide-title .subtitle {
+        font-size: 22px;
+        color: var(--purple-pale);
+        font-weight: 300;
+        max-width: 700px;
+        margin-bottom: 48px;
+      }
+
+      .slide-title .meta {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      /* ===== GRID LAYOUTS ===== */
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px;
+      }
+
+      .grid-4 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 16px;
+      }
+
+      /* ===== CARDS ===== */
+      .card {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(168, 85, 247, 0.15);
+        border-radius: 12px;
+        padding: 28px;
+      }
+
+      .card h3 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+
+      .card .card-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--purple-brand);
+        margin-bottom: 14px;
+        font-weight: 600;
+      }
+
+      .card p {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.65);
+        line-height: 1.6;
+        margin-bottom: 12px;
+      }
+
+      .card-accent-blue {
+        border-color: rgba(37, 99, 235, 0.3);
+        background: rgba(37, 99, 235, 0.06);
+      }
+
+      .card-accent-green {
+        border-color: rgba(34, 197, 94, 0.3);
+        background: rgba(34, 197, 94, 0.06);
+      }
+
+      .card-accent-purple {
+        border-color: rgba(168, 85, 247, 0.3);
+        background: rgba(168, 85, 247, 0.06);
+      }
+
+      .card-accent-cyan {
+        border-color: rgba(6, 182, 212, 0.3);
+        background: rgba(6, 182, 212, 0.06);
+      }
+
+      .card-accent-orange {
+        border-color: rgba(245, 158, 11, 0.3);
+        background: rgba(245, 158, 11, 0.06);
+      }
+
+      /* ===== PILLS ===== */
+      .pill-row {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-top: 8px;
+      }
+
+      .pill {
+        font-size: 11px;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-weight: 500;
+      }
+
+      .pill-pink { background: rgba(236, 72, 153, 0.15); color: #f472b6; }
+      .pill-blue { background: rgba(37, 99, 235, 0.15); color: #60a5fa; }
+      .pill-green { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
+      .pill-orange { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+      .pill-purple { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
+
+      /* ===== ARCHITECTURE DIAGRAM ===== */
+      .arch-layer {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+
+      .arch-box {
+        padding: 14px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        text-align: center;
+        min-width: 120px;
+      }
+
+      .arch-box .sub {
+        font-size: 11px;
+        font-weight: 400;
+        opacity: 0.65;
+        display: block;
+        margin-top: 3px;
+      }
+
+      .arch-apps {
+        background: rgba(37, 99, 235, 0.12);
+        border: 1px solid rgba(37, 99, 235, 0.3);
+        color: #93c5fd;
+        flex: 1;
+        max-width: 700px;
+      }
+
+      .arch-protocol {
+        background: rgba(245, 158, 11, 0.12);
+        border: 1px solid rgba(245, 158, 11, 0.3);
+        color: #fcd34d;
+        min-width: 90px;
+      }
+
+      .arch-idp {
+        background: rgba(168, 85, 247, 0.15);
+        border: 1px solid rgba(168, 85, 247, 0.4);
+        color: #d8b4fe;
+        flex: 1;
+        max-width: 700px;
+      }
+
+      .arch-product {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--purple-brand);
+        color: var(--white);
+        flex: 1;
+      }
+
+      .arch-db {
+        background: rgba(6, 182, 212, 0.1);
+        border: 1px solid rgba(6, 182, 212, 0.3);
+        color: #67e8f9;
+        flex: 1;
+      }
+
+      .arch-arrow {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.2);
+        font-size: 16px;
+        margin: 4px 0;
+        letter-spacing: 6px;
+      }
+
+      .arch-protocols {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin: 4px 0;
+      }
+
+      /* ===== FLOW DIAGRAMS ===== */
+      .flow-row {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        margin-bottom: 16px;
+      }
+
+      .flow-step {
+        font-size: 13px;
+        font-weight: 500;
+        padding: 14px 18px;
+        border-radius: 8px;
+        text-align: center;
+        flex: 1;
+      }
+
+      .flow-arrow {
+        color: rgba(255, 255, 255, 0.2);
+        font-size: 20px;
+        padding: 0 8px;
+        flex-shrink: 0;
+      }
+
+      .flow-user { background: rgba(37, 99, 235, 0.12); border: 1px solid rgba(37, 99, 235, 0.3); color: #93c5fd; }
+      .flow-action { background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); color: #fcd34d; }
+      .flow-system { background: rgba(168, 85, 247, 0.12); border: 1px solid rgba(168, 85, 247, 0.3); color: #d8b4fe; }
+      .flow-result { background: rgba(34, 197, 94, 0.12); border: 1px solid rgba(34, 197, 94, 0.3); color: #4ade80; }
+
+      .flow-label {
+        font-size: 14px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 10px;
+      }
+
+      /* ===== COMPARISON TABLE ===== */
+      .compare-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+        margin-top: 12px;
+      }
+
+      .compare-table th {
+        background: rgba(168, 85, 247, 0.2);
+        color: var(--purple-light);
+        padding: 12px 16px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 13px;
+        border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+      }
+
+      .compare-table th:first-child {
+        text-align: left;
+        border-radius: 8px 0 0 0;
+      }
+
+      .compare-table th:last-child {
+        border-radius: 0 8px 0 0;
+      }
+
+      .compare-table td {
+        padding: 10px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        text-align: center;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 13px;
+      }
+
+      .compare-table td:first-child {
+        text-align: left;
+        font-weight: 500;
+        color: var(--white);
+      }
+
+      .compare-table tr:nth-child(even) td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .check { color: var(--green-accent); font-weight: 700; }
+      .cross { color: var(--red-accent); font-weight: 700; }
+      .partial { color: var(--orange-accent); font-weight: 700; }
+
+      /* ===== INTEGRATION CHIPS ===== */
+      .chip-grid {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .chip {
+        font-size: 13px;
+        padding: 8px 18px;
+        border-radius: 20px;
+        font-weight: 500;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .chip.primary {
+        background: rgba(168, 85, 247, 0.12);
+        border-color: rgba(168, 85, 247, 0.3);
+        color: #d8b4fe;
+      }
+
+      /* ===== BULLET LISTS ===== */
+      .bullet-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .bullet-list li {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+        padding: 6px 0 6px 20px;
+        position: relative;
+        line-height: 1.5;
+      }
+
+      .bullet-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 13px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+
+      .bullet-blue li::before { background: var(--blue-accent); }
+      .bullet-green li::before { background: var(--green-accent); }
+      .bullet-purple li::before { background: var(--purple-brand); }
+      .bullet-cyan li::before { background: var(--cyan-accent); }
+
+      /* ===== STAT CARDS ===== */
+      .stat-row {
+        display: flex;
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+
+      .stat-card {
+        text-align: center;
+        flex: 1;
+      }
+
+      .stat-card .number {
+        font-family: "Poppins", sans-serif;
+        font-size: 36px;
+        font-weight: 700;
+        color: var(--purple-brand);
+        line-height: 1.1;
+      }
+
+      .stat-card .label {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.5);
+        margin-top: 4px;
+      }
+
+      /* ===== CTA SLIDE ===== */
+      .slide-cta {
+        background: linear-gradient(135deg, var(--purple-dark), var(--purple-deep));
+        text-align: center;
+        align-items: center;
+      }
+
+      .cta-btn {
+        display: inline-block;
+        background: var(--purple-brand);
+        color: var(--white);
+        padding: 16px 40px;
+        border-radius: 10px;
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        font-size: 16px;
+        text-decoration: none;
+        margin-top: 32px;
+        transition: background 0.2s;
+      }
+
+      .cta-btn:hover {
+        background: var(--purple-light);
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- ===== SLIDE 1: TITLE ===== -->
+    <div class="slide slide-title">
+      <div class="logo">BlokSec</div>
+      <h1>Technical Architecture</h1>
+      <div class="subtitle">
+        How passwordless authentication works — from asymmetric cryptography
+        to deviceless QR badge MFA — with zero server-side secrets.
+      </div>
+      <div class="meta">Sales Engineering Reference — February 2026</div>
+    </div>
+
+    <!-- ===== SLIDE 2: SYSTEM ARCHITECTURE ===== -->
+    <div class="slide">
+      <div class="slide-number">02</div>
+      <div class="slide-label">System Architecture</div>
+      <h2>Full-Stack Identity Platform</h2>
+      <div class="subtitle">Standard protocol integration from enterprise apps through to cryptographic data stores.</div>
+
+      <div style="max-width: 750px; margin: 0 auto;">
+        <div class="arch-layer">
+          <div class="arch-box arch-apps">
+            Enterprise Applications
+            <span class="sub">M365, Google Workspace, Salesforce, Custom Apps</span>
+          </div>
+        </div>
+        <div class="arch-arrow">▼ ▼ ▼</div>
+        <div class="arch-protocols">
+          <div class="arch-box arch-protocol">OIDC</div>
+          <div class="arch-box arch-protocol">SAML 2.0</div>
+          <div class="arch-box arch-protocol">WS-Fed</div>
+        </div>
+        <div class="arch-arrow">▼ ▼ ▼</div>
+        <div class="arch-layer">
+          <div class="arch-box arch-idp">
+            BlokSec Identity Provider (IdP)
+            <span class="sub">Centralized authentication gateway — standard protocol integration</span>
+          </div>
+        </div>
+        <div class="arch-arrow">▼ ▼ ▼</div>
+        <div class="arch-layer">
+          <div class="arch-box arch-product">BlokKey<span class="sub">Mobile 3-Factor</span></div>
+          <div class="arch-box arch-product">BlokBadge<span class="sub">QR Badge + PIN</span></div>
+          <div class="arch-box arch-product">BlokSafe<span class="sub">Credential Vault</span></div>
+          <div class="arch-box arch-product">Admin<span class="sub">Management</span></div>
+        </div>
+        <div class="arch-arrow">▼ ▼ ▼</div>
+        <div class="arch-layer">
+          <div class="arch-box arch-db">MongoDB<span class="sub">Configuration</span></div>
+          <div class="arch-box arch-db">DynamoDB<span class="sub">Runtime / Sessions</span></div>
+          <div class="arch-box arch-db">Immutable DB<span class="sub">Audit Trail</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SLIDE 3: BLOKKEY ===== -->
+    <div class="slide">
+      <div class="slide-number">03</div>
+      <div class="slide-label">Authentication Product</div>
+      <h2>BlokKey — Mobile Passwordless MFA</h2>
+      <div class="subtitle">3-factor authentication for knowledge workers. No password at any point in the flow.</div>
+
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="number">3</div>
+          <div class="label">Authentication Factors</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">0</div>
+          <div class="label">Passwords Involved</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">0</div>
+          <div class="label">Server-Side Secrets</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">Per-App</div>
+          <div class="label">Key Isolation (HD Wallet)</div>
+        </div>
+      </div>
+
+      <div class="flow-label">Authentication Flow</div>
+      <div class="flow-row">
+        <div class="flow-step flow-user">User logs into app</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step flow-system">BlokSec IdP sends push to device</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step flow-action">User confirms (biometric + intent)</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step flow-result">Authenticated ✓</div>
+      </div>
+
+      <div class="grid-2" style="margin-top: 24px;">
+        <div class="card card-accent-blue">
+          <h3 style="color: #93c5fd;">How It Works</h3>
+          <p>Push notification to registered device. Biometric confirmation + intent verification. ECDSA signature sent back. No password ever enters the flow.</p>
+          <div class="pill-row">
+            <span class="pill pill-pink">Biometric</span>
+            <span class="pill pill-blue">Device</span>
+            <span class="pill pill-green">Intent</span>
+          </div>
+        </div>
+        <div class="card card-accent-purple">
+          <h3 style="color: #d8b4fe;">HD Wallet Key Isolation</h3>
+          <p>Hierarchical Deterministic wallet generates a unique ECDSA key pair per application. Private keys never leave the device. Compromise of one app does not compromise others.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SLIDE 4: BLOKBADGE ===== -->
+    <div class="slide">
+      <div class="slide-number">04</div>
+      <div class="slide-label">Authentication Product</div>
+      <h2>BlokBadge — Deviceless MFA</h2>
+      <div class="subtitle">2-factor authentication for frontline workers. No smartphone. No hardware token. Works with gloves.</div>
+
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="number">2</div>
+          <div class="label">Authentication Factors</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">30s</div>
+          <div class="label">Badge Print Time</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">Instant</div>
+          <div class="label">Badge Revocation</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">Split-Key</div>
+          <div class="label">Cryptographic Model</div>
+        </div>
+      </div>
+
+      <div class="flow-label">Authentication Flow</div>
+      <div class="flow-row">
+        <div class="flow-step flow-user">Worker scans QR badge</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step flow-action">Enters personal PIN</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step flow-system">Server combines key fragments</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step flow-result">Authenticated ✓</div>
+      </div>
+
+      <div class="grid-2" style="margin-top: 24px;">
+        <div class="card card-accent-green">
+          <h3 style="color: #4ade80;">Split-Key Cryptography</h3>
+          <p>Badge holds encrypted Key Fragment A. Server holds Key Fragment B. Neither fragment is usable alone. Lost badge is cryptographically worthless without the server half.</p>
+          <div class="pill-row">
+            <span class="pill pill-orange">Possession (Badge)</span>
+            <span class="pill pill-purple">Knowledge (PIN)</span>
+          </div>
+        </div>
+        <div class="card card-accent-orange">
+          <h3 style="color: #fbbf24;">Built for the Floor</h3>
+          <ul class="bullet-list" style="margin-top: 8px;">
+            <li>Works with gloves, PPE, clean rooms</li>
+            <li>No personal device required</li>
+            <li>New badge prints in 30 seconds</li>
+            <li>High-turnover friendly — instant onboard/offboard</li>
+            <li>Shared terminal compatible</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SLIDE 5: CRYPTOGRAPHIC FOUNDATIONS ===== -->
+    <div class="slide">
+      <div class="slide-number">05</div>
+      <div class="slide-label">Cryptographic Foundations</div>
+      <h2>Zero Server-Side Secrets</h2>
+      <div class="subtitle">Three layers of cryptographic protection ensure there is nothing stored server-side worth stealing.</div>
+
+      <div class="grid-3">
+        <div class="card card-accent-blue">
+          <h3 style="color: #93c5fd; font-size: 16px;">ECDSA Asymmetric Crypto</h3>
+          <ul class="bullet-list bullet-blue" style="margin-top: 12px;">
+            <li>No shared secrets between client and server</li>
+            <li>Private keys never transmitted over network</li>
+            <li>Eliminates MITM and replay attacks</li>
+            <li>Server compromise yields nothing usable</li>
+          </ul>
+        </div>
+        <div class="card card-accent-green">
+          <h3 style="color: #4ade80; font-size: 16px;">Split-Key Security</h3>
+          <p style="font-size: 12px; margin-top: 4px;">BlokBadge</p>
+          <ul class="bullet-list bullet-green" style="margin-top: 8px;">
+            <li>Badge: encrypted partial key (Fragment A)</li>
+            <li>Server: complementary key (Fragment B)</li>
+            <li>Both fragments required for authentication</li>
+            <li>Lost badge = useless without server half</li>
+          </ul>
+        </div>
+        <div class="card card-accent-purple">
+          <h3 style="color: #d8b4fe; font-size: 16px;">HD Wallet Isolation</h3>
+          <p style="font-size: 12px; margin-top: 4px;">BlokKey</p>
+          <ul class="bullet-list bullet-purple" style="margin-top: 8px;">
+            <li>Unique key pair generated per application</li>
+            <li>Hierarchical Deterministic derivation</li>
+            <li>Compromise of one app ≠ compromise of others</li>
+            <li>Keys derived on demand, not stored in bulk</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SLIDE 6: SECURITY COMPARISON ===== -->
+    <div class="slide">
+      <div class="slide-number">06</div>
+      <div class="slide-label">Security Comparison</div>
+      <h2>How BlokSec Compares</h2>
+      <div class="subtitle">Side-by-side against traditional MFA methods across 7 security properties.</div>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>SMS / TOTP</th>
+            <th>Push (Duo/Okta)</th>
+            <th>FIDO2 Keys</th>
+            <th>BlokKey</th>
+            <th>BlokBadge</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Phishing resistant</td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="partial">~</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="partial">~</span> PIN-based</td>
+          </tr>
+          <tr>
+            <td>No server-side secrets</td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="partial">~</span> Split-key</td>
+          </tr>
+          <tr>
+            <td>Works without smartphone</td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Works with gloves / PPE</td>
+            <td>N/A</td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="partial">~</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Per-app key isolation</td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="check">✓</span> Origin-scoped</td>
+            <td><span class="check">✓</span></td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Immutable audit trail</td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Zero replacement cost</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">✕</span> $25-90</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span> reprint</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ===== SLIDE 7: INTEGRATIONS & DATA ===== -->
+    <div class="slide">
+      <div class="slide-number">07</div>
+      <div class="slide-label">Platform Integration</div>
+      <h2>Integrations & Data Architecture</h2>
+      <div class="subtitle">Drop-in IdP integration via standard protocols. No proprietary connectors required.</div>
+
+      <div style="margin-bottom: 32px;">
+        <h3 style="font-size: 16px; margin-bottom: 16px; color: rgba(255,255,255,0.8);">Supported Identity Providers & Applications</h3>
+        <div class="chip-grid">
+          <span class="chip primary">Microsoft Entra ID</span>
+          <span class="chip primary">Google Workspace</span>
+          <span class="chip primary">Okta</span>
+          <span class="chip primary">Ping Identity</span>
+          <span class="chip">Salesforce</span>
+          <span class="chip">CyberArk</span>
+          <span class="chip">BeyondTrust</span>
+          <span class="chip">Delinea</span>
+          <span class="chip">Any OIDC App</span>
+          <span class="chip">Any SAML 2.0 App</span>
+          <span class="chip">Any WS-Fed App</span>
+        </div>
+      </div>
+
+      <h3 style="font-size: 16px; margin-bottom: 16px; color: rgba(255,255,255,0.8);">Data Architecture</h3>
+      <div class="grid-3">
+        <div class="card card-accent-cyan">
+          <h3 style="color: #67e8f9; font-size: 15px;">MongoDB</h3>
+          <ul class="bullet-list bullet-cyan" style="margin-top: 8px;">
+            <li>User profiles & configuration</li>
+            <li>Application settings</li>
+            <li>Flexible schema for multi-tenant</li>
+          </ul>
+        </div>
+        <div class="card card-accent-cyan">
+          <h3 style="color: #67e8f9; font-size: 15px;">DynamoDB</h3>
+          <ul class="bullet-list bullet-cyan" style="margin-top: 8px;">
+            <li>Runtime authentication events</li>
+            <li>Session management</li>
+            <li>Low-latency, high throughput</li>
+          </ul>
+        </div>
+        <div class="card card-accent-cyan">
+          <h3 style="color: #67e8f9; font-size: 15px;">Immutable DB</h3>
+          <ul class="bullet-list bullet-cyan" style="margin-top: 8px;">
+            <li>Append-only audit trail</li>
+            <li>Tamper-proof compliance evidence</li>
+            <li>Cryptographically verified records</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SLIDE 8: CTA ===== -->
+    <div class="slide slide-cta">
+      <div class="slide-number">08</div>
+      <div class="slide-label">Next Steps</div>
+      <h2 style="font-size: 48px;">See It In Action</h2>
+      <div class="subtitle" style="text-align: center; margin: 0 auto 16px;">
+        15-minute technical demo — watch BlokBadge authenticate a floor worker
+        and BlokKey handle a knowledge worker, end to end.
+      </div>
+      <a class="cta-btn" href="mailto:partners@bloksec.com?subject=Technical%20Demo%20Request">Book Technical Demo</a>
+    </div>
+
+  </body>
+</html>

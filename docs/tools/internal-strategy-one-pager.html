@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlokSec GTM Strategy — Internal Overview</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0; }
+
+:root {
+  --purple-dark: #1a0a2e;
+  --purple-deep: #311043;
+  --purple-mid: #6b21a8;
+  --purple-brand: #a855f7;
+  --purple-light: #c084fc;
+  --purple-pale: #f3e8ff;
+  --green: #22c55e;
+  --green-light: #dcfce7;
+  --orange: #f59e0b;
+  --orange-light: #fef3c7;
+  --blue: #2563eb;
+  --blue-light: #dbeafe;
+  --red: #ef4444;
+  --white: #ffffff;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-900: #111827;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--gray-900);
+  background: var(--white);
+  width: 8.5in;
+  min-height: 11in;
+  margin: 0 auto;
+  position: relative;
+}
+
+h1, h2, h3, h4, h5 { font-family: 'Poppins', sans-serif; }
+
+.page {
+  width: 100%;
+  height: 11in;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* HEADER */
+.top-bar {
+  background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple-deep) 60%, var(--purple-mid) 100%);
+  padding: 20px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.5px;
+}
+
+.logo span { color: var(--purple-brand); }
+
+.top-bar-right {
+  text-align: right;
+}
+
+.top-bar-right .doc-type {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--purple-light);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.top-bar-right .date {
+  font-size: 0.625rem;
+  color: rgba(255,255,255,0.5);
+  margin-top: 2px;
+}
+
+/* HERO STRIP */
+.hero {
+  background: linear-gradient(135deg, var(--purple-deep), var(--purple-mid));
+  padding: 18px 36px;
+  color: var(--white);
+}
+
+.hero h1 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.hero p {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  max-width: 650px;
+  line-height: 1.45;
+}
+
+/* MAIN CONTENT */
+.content {
+  padding: 16px 36px 0;
+}
+
+/* TWO COLUMN LAYOUT */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 14px;
+}
+
+.three-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+/* SECTION HEADERS */
+.section-header {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--purple-mid);
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--purple-brand);
+  display: inline-block;
+}
+
+/* THE OPPORTUNITY BOX */
+.opportunity-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.stat-card {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 6px;
+  padding: 10px 12px;
+  text-align: center;
+}
+
+.stat-card .number {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--purple-mid);
+  line-height: 1.2;
+}
+
+.stat-card .label {
+  font-size: 0.563rem;
+  color: var(--gray-500);
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
+/* STRATEGY BOXES */
+.strategy-box {
+  border-radius: 8px;
+  padding: 14px 16px;
+  height: 100%;
+}
+
+.strategy-box h3 {
+  font-size: 0.75rem;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.strategy-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.strategy-box li {
+  font-size: 0.688rem;
+  padding: 3px 0;
+  padding-left: 14px;
+  position: relative;
+  color: var(--gray-700);
+  line-height: 1.4;
+}
+
+.strategy-box li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+.box-purple {
+  background: var(--purple-pale);
+  border: 1px solid #d8b4fe;
+}
+
+.box-purple h3 { color: var(--purple-mid); }
+.box-purple li::before { background: var(--purple-brand); }
+
+.box-green {
+  background: var(--green-light);
+  border: 1px solid #86efac;
+}
+
+.box-green h3 { color: #15803d; }
+.box-green li::before { background: var(--green); }
+
+.box-blue {
+  background: var(--blue-light);
+  border: 1px solid #93c5fd;
+}
+
+.box-blue h3 { color: var(--blue); }
+.box-blue li::before { background: var(--blue); }
+
+.box-orange {
+  background: var(--orange-light);
+  border: 1px solid #fcd34d;
+}
+
+.box-orange h3 { color: #b45309; }
+.box-orange li::before { background: var(--orange); }
+
+/* TARGET TABLE */
+.target-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.625rem;
+  margin-bottom: 14px;
+}
+
+.target-table th {
+  background: var(--purple-deep);
+  color: var(--white);
+  padding: 6px 10px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 0.625rem;
+}
+
+.target-table th:first-child { border-radius: 4px 0 0 0; }
+.target-table th:last-child { border-radius: 0 4px 0 0; }
+
+.target-table td {
+  padding: 5px 10px;
+  border-bottom: 1px solid var(--gray-200);
+  color: var(--gray-700);
+  vertical-align: top;
+}
+
+.target-table tr:nth-child(even) td { background: var(--gray-50); }
+
+/* REVENUE BAR */
+.revenue-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.revenue-card {
+  padding: 10px 14px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.revenue-card.yr1 {
+  background: var(--purple-pale);
+  border: 1px solid #d8b4fe;
+}
+
+.revenue-card.yr2 {
+  background: #ede9fe;
+  border: 1px solid #c4b5fd;
+}
+
+.revenue-card.yr3 {
+  background: var(--green-light);
+  border: 1px solid #86efac;
+}
+
+.revenue-card .year-label {
+  font-size: 0.563rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  color: var(--gray-500);
+}
+
+.revenue-card .arr {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.revenue-card.yr1 .arr { color: var(--purple-mid); }
+.revenue-card.yr2 .arr { color: #5b21b6; }
+.revenue-card.yr3 .arr { color: #15803d; }
+
+.revenue-card .detail {
+  font-size: 0.563rem;
+  color: var(--gray-500);
+  margin-top: 1px;
+}
+
+/* 90-DAY ACTIONS */
+.actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.action-col h4 {
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.action-col.now h4 { background: #fee2e2; color: #dc2626; }
+.action-col.soon h4 { background: var(--orange-light); color: #b45309; }
+.action-col.next h4 { background: var(--blue-light); color: var(--blue); }
+
+.action-col ol {
+  padding-left: 16px;
+  font-size: 0.625rem;
+  color: var(--gray-700);
+}
+
+.action-col li {
+  padding: 2px 0;
+  line-height: 1.4;
+}
+
+/* FOOTER */
+.page-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--gray-50);
+  border-top: 1px solid var(--gray-200);
+  padding: 10px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-footer .left {
+  font-size: 0.563rem;
+  color: var(--gray-500);
+}
+
+.page-footer .right {
+  font-size: 0.563rem;
+  color: var(--gray-500);
+}
+
+.confidential {
+  font-size: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--red);
+  font-weight: 600;
+}
+
+@media print {
+  body { width: 100%; }
+  .page { height: auto; min-height: 11in; page-break-after: always; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="top-bar">
+    <div class="logo">Blok<span>Sec</span></div>
+    <div class="top-bar-right">
+      <div class="doc-type">GTM Strategy Overview</div>
+      <div class="date">Internal — February 2026</div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Go-to-Market Strategy: Passwordless Authentication for Frontline Workers</h1>
+    <p>Capture the underserved frontline worker authentication market through MSP/partner channel, targeting manufacturing and retail verticals where compliance mandates are creating urgent buyer demand.</p>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- THE OPPORTUNITY -->
+    <div class="section-header">The Opportunity</div>
+    <div class="opportunity-grid">
+      <div class="stat-card">
+        <div class="number">$25B+</div>
+        <div class="label">Passwordless Auth<br>Market (2025)</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">18%</div>
+        <div class="label">Annual Growth<br>Rate (CAGR)</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">2.7B</div>
+        <div class="label">Frontline Workers<br>Globally</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">81%</div>
+        <div class="label">Breaches from<br>Stolen Credentials</div>
+      </div>
+    </div>
+
+    <!-- STRATEGY PILLARS -->
+    <div class="section-header">Strategy Pillars</div>
+    <div class="two-col">
+      <div class="strategy-box box-purple">
+        <h3>MSP / Partner Channel</h3>
+        <ul>
+          <li><strong>Primary GTM route</strong> — MSPs serve the exact SMB/mid-market profile that needs us</li>
+          <li><strong>40-55% margins</strong> for partners on $3-5/user/mo recurring revenue</li>
+          <li><strong>Eliminates 30-40%</strong> of MSP help desk tickets (password resets at $70 each)</li>
+          <li><strong>3-tier program:</strong> Referral (20%) → Reseller (40%) → Strategic (55%)</li>
+          <li><strong>Force multiplier</strong> — partners sell, deploy, and support</li>
+        </ul>
+      </div>
+      <div class="strategy-box box-green">
+        <h3>Content & SEO Engine</h3>
+        <ul>
+          <li><strong>Weekly:</strong> Breach analysis series — newsjack breaches, show passwordless prevention</li>
+          <li><strong>Monthly:</strong> Compliance deep-dives — PCI DSS 4.0, FDA 21 CFR Part 11, SOC 2</li>
+          <li><strong>Quarterly:</strong> Industry landing pages — manufacturing, retail, warehousing</li>
+          <li><strong>Own "frontline worker authentication"</strong> — no competitor has claimed this space</li>
+          <li><strong>~6-8 hours/week</strong> for all content production</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TARGET MARKETS -->
+    <div class="section-header">Target Markets (Phase 1)</div>
+    <table class="target-table">
+      <thead>
+        <tr>
+          <th>Market</th>
+          <th>NA Workers</th>
+          <th>Why BlokBadge Wins</th>
+          <th>Compliance Driver</th>
+          <th>Buyer Trigger</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Manufacturing</strong></td>
+          <td>12.8M</td>
+          <td>Gloved workers, clean rooms, no personal devices on floor</td>
+          <td>FDA 21 CFR Part 11, SOC 2</td>
+          <td>Audit failures, customer requirements</td>
+        </tr>
+        <tr>
+          <td><strong>Retail</strong></td>
+          <td>16M</td>
+          <td>Shared POS terminals, 100-150% annual turnover, seasonal staff</td>
+          <td>PCI DSS 4.0 (active now)</td>
+          <td>PCI compliance deadline, breach risk</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- COMPETITIVE EDGE -->
+    <div class="two-col">
+      <div>
+        <div class="section-header">Why We Win</div>
+        <div class="strategy-box box-blue" style="margin-bottom:0">
+          <ul>
+            <li><strong>vs. Duo/Okta/Entra:</strong> They require smartphones. BlokBadge doesn't.</li>
+            <li><strong>vs. OLOID:</strong> OLOID needs RFID/NFC infrastructure. We need a printer.</li>
+            <li><strong>vs. Yubico:</strong> Keys cost $25-90 each, get lost. Badges are printed.</li>
+            <li><strong>vs. HYPR:</strong> Enterprise-complex. We're built for MSPs and mid-market.</li>
+            <li><strong>Full coverage:</strong> BlokKey (office) + BlokBadge (floor) = one platform, every worker</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="section-header">Revenue Targets</div>
+        <div class="revenue-strip" style="margin-bottom:8px">
+          <div class="revenue-card yr1">
+            <div class="year-label">Year 1</div>
+            <div class="arr">$84K</div>
+            <div class="detail">10 MSPs × 200 users</div>
+          </div>
+          <div class="revenue-card yr2">
+            <div class="year-label">Year 2</div>
+            <div class="arr">$630K</div>
+            <div class="detail">50 MSPs × 300 users</div>
+          </div>
+          <div class="revenue-card yr3">
+            <div class="year-label">Year 3</div>
+            <div class="arr">$3.4M</div>
+            <div class="detail">150 MSPs + 20 direct</div>
+          </div>
+        </div>
+        <div class="strategy-box box-orange" style="padding:10px 14px">
+          <h3 style="font-size:0.65rem;margin-bottom:4px">Key Risks</h3>
+          <ul>
+            <li style="font-size:0.625rem">OLOID has enterprise momentum (Tyson, PepsiCo, Dell) — we focus SMB/mid-market</li>
+            <li style="font-size:0.625rem">No public case studies yet — prioritize 2-3 pilot customers</li>
+            <li style="font-size:0.625rem">Microsoft may add frontline auth — position as complement, not competitor</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 90-DAY ACTIONS -->
+    <div class="section-header">90-Day Action Plan</div>
+    <div class="actions-grid">
+      <div class="action-col now">
+        <h4>Week 1-2: Validate</h4>
+        <ol>
+          <li>Identify 10 manufacturing/retail-focused MSPs</li>
+          <li>Send 5 outreach emails to test messaging</li>
+          <li>Publish MSP partner program page (even 1-page)</li>
+          <li>Launch ROI calculator on website</li>
+          <li>Post 3x on LinkedIn (compliance angles)</li>
+        </ol>
+      </div>
+      <div class="action-col soon">
+        <h4>Month 1: Build Foundation</h4>
+        <ol>
+          <li>Formalize 3-tier MSP partner program</li>
+          <li>Publish compliance guides (PCI DSS, FDA)</li>
+          <li>Start weekly breach analysis blog series</li>
+          <li>Create MSP sales enablement kit</li>
+          <li>Sign first 2-3 MSP referral partners</li>
+        </ol>
+      </div>
+      <div class="action-col next">
+        <h4>Month 2-3: Scale</h4>
+        <ol>
+          <li>Get 2-3 pilot customer case studies</li>
+          <li>Launch industry landing pages</li>
+          <li>Build competitive battlecards for partners</li>
+          <li>Explore TD Synnex distribution</li>
+          <li>Begin guest posting (Dark Reading, CSO)</li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <div class="left">
+      <span class="confidential">Confidential — Internal Use Only</span>
+    </div>
+    <div class="right">
+      BlokSec GTM Strategy — February 2026 — Page 1 of 1
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlokSec GTM — Document Viewer</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+      :root {
+        --purple-dark: #1a0a2e;
+        --purple-deep: #311043;
+        --purple-mid: #6b21a8;
+        --purple-brand: #a855f7;
+        --purple-light: #c084fc;
+        --purple-pale: #f3e8ff;
+        --white: #ffffff;
+        --gray-50: #f9fafb;
+        --gray-100: #f3f4f6;
+        --gray-200: #e5e7eb;
+        --gray-500: #6b7280;
+        --gray-700: #374151;
+        --gray-900: #111827;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        background: var(--gray-50);
+        color: var(--gray-900);
+        line-height: 1.6;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Poppins", sans-serif;
+      }
+
+      .top-bar {
+        background: linear-gradient(
+          135deg,
+          var(--purple-dark),
+          var(--purple-deep)
+        );
+        padding: 16px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .top-bar a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        font-size: 0.813rem;
+        transition: color 0.2s;
+      }
+
+      .top-bar a:hover {
+        color: var(--white);
+      }
+
+      .logo {
+        font-family: "Poppins", sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--white);
+        letter-spacing: 1px;
+      }
+
+      .logo span {
+        color: var(--purple-brand);
+      }
+
+      .container {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 40px 24px 80px;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 80px 24px;
+        color: var(--gray-500);
+        font-size: 0.875rem;
+      }
+
+      .error {
+        text-align: center;
+        padding: 80px 24px;
+        color: #dc2626;
+        font-size: 0.875rem;
+      }
+
+      /* Markdown content styles */
+      .md-content h1 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--purple-deep);
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid var(--purple-brand);
+      }
+
+      .md-content h2 {
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--purple-deep);
+        margin-top: 32px;
+        margin-bottom: 12px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid var(--gray-200);
+      }
+
+      .md-content h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--gray-900);
+        margin-top: 24px;
+        margin-bottom: 8px;
+      }
+
+      .md-content h4 {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--gray-700);
+        margin-top: 20px;
+        margin-bottom: 6px;
+      }
+
+      .md-content p {
+        margin-bottom: 12px;
+        color: var(--gray-700);
+        font-size: 0.9rem;
+        line-height: 1.7;
+      }
+
+      .md-content ul,
+      .md-content ol {
+        margin-bottom: 12px;
+        padding-left: 24px;
+        color: var(--gray-700);
+        font-size: 0.9rem;
+      }
+
+      .md-content li {
+        margin-bottom: 4px;
+        line-height: 1.6;
+      }
+
+      .md-content strong {
+        color: var(--gray-900);
+      }
+
+      .md-content code {
+        background: var(--gray-100);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.813rem;
+        color: var(--purple-mid);
+      }
+
+      .md-content pre {
+        background: var(--gray-900);
+        color: #e5e7eb;
+        padding: 16px 20px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin-bottom: 16px;
+        font-size: 0.813rem;
+        line-height: 1.6;
+      }
+
+      .md-content pre code {
+        background: none;
+        padding: 0;
+        color: inherit;
+        font-size: inherit;
+      }
+
+      .md-content blockquote {
+        border-left: 3px solid var(--purple-brand);
+        margin: 16px 0;
+        padding: 8px 16px;
+        background: var(--purple-pale);
+        color: var(--gray-700);
+        font-size: 0.875rem;
+        border-radius: 0 6px 6px 0;
+      }
+
+      .md-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 16px;
+        font-size: 0.813rem;
+      }
+
+      .md-content th {
+        background: var(--purple-deep);
+        color: var(--white);
+        padding: 10px 12px;
+        text-align: left;
+        font-weight: 500;
+      }
+
+      .md-content th:first-child {
+        border-radius: 6px 0 0 0;
+      }
+
+      .md-content th:last-child {
+        border-radius: 0 6px 0 0;
+      }
+
+      .md-content td {
+        padding: 8px 12px;
+        border-bottom: 1px solid var(--gray-200);
+        color: var(--gray-700);
+      }
+
+      .md-content tr:nth-child(even) td {
+        background: var(--gray-50);
+      }
+
+      .md-content hr {
+        border: none;
+        border-top: 1px solid var(--gray-200);
+        margin: 28px 0;
+      }
+
+      .md-content a {
+        color: var(--purple-mid);
+        text-decoration: underline;
+      }
+
+      .md-content a:hover {
+        color: var(--purple-brand);
+      }
+
+      .md-content img {
+        max-width: 100%;
+        border-radius: 8px;
+        margin: 12px 0;
+      }
+
+      .file-path {
+        font-size: 0.688rem;
+        color: var(--gray-500);
+        margin-bottom: 24px;
+        font-family: monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-bar">
+      <div class="logo">Blok<span>Sec</span> GTM</div>
+      <a href="index.html">Back to Resource Hub</a>
+    </div>
+
+    <div class="container">
+      <div id="file-path" class="file-path"></div>
+      <div id="content" class="md-content">
+        <div class="loading">Loading document...</div>
+      </div>
+    </div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const file = params.get("file");
+
+      if (!file) {
+        document.getElementById("content").innerHTML =
+          '<div class="error">No file specified. Return to the <a href="index.html">Resource Hub</a>.</div>';
+      } else {
+        document.getElementById("file-path").textContent = file;
+
+        fetch(file)
+          .then((response) => {
+            if (!response.ok) throw new Error("File not found");
+            return response.text();
+          })
+          .then((text) => {
+            document.getElementById("content").innerHTML = marked.parse(text);
+            // Set page title from first heading
+            const firstH1 = document.querySelector(".md-content h1");
+            if (firstH1) {
+              document.title = firstH1.textContent + " — BlokSec GTM";
+            }
+          })
+          .catch(() => {
+            document.getElementById("content").innerHTML =
+              '<div class="error">Could not load document. The file may not exist or cannot be accessed directly. <a href="index.html">Return to Resource Hub</a>.</div>';
+          });
+      }
+    </script>
+  </body>
+</html>

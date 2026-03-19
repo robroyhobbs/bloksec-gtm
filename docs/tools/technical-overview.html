@@ -1,0 +1,895 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlokSec Technical Architecture Overview</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @page {
+        size: letter;
+        margin: 0;
+      }
+
+      :root {
+        --purple-dark: #1a0a2e;
+        --purple-deep: #311043;
+        --purple-mid: #6b21a8;
+        --purple-brand: #a855f7;
+        --purple-light: #c084fc;
+        --purple-pale: #f3e8ff;
+        --green: #22c55e;
+        --green-light: #dcfce7;
+        --blue: #2563eb;
+        --blue-light: #dbeafe;
+        --orange: #f59e0b;
+        --orange-light: #fef3c7;
+        --cyan: #06b6d4;
+        --cyan-light: #cffafe;
+        --white: #ffffff;
+        --gray-50: #f9fafb;
+        --gray-100: #f3f4f6;
+        --gray-200: #e5e7eb;
+        --gray-300: #d1d5db;
+        --gray-500: #6b7280;
+        --gray-700: #374151;
+        --gray-800: #1f2937;
+        --gray-900: #111827;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        color: var(--gray-900);
+        background: var(--white);
+        width: 8.5in;
+        margin: 0 auto;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        font-family: "Poppins", sans-serif;
+      }
+      .mono {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .page {
+        width: 100%;
+        min-height: 11in;
+        padding: 0;
+        position: relative;
+        page-break-after: always;
+      }
+
+      /* PAGE 1 */
+      .top-bar {
+        background: linear-gradient(
+          135deg,
+          var(--purple-dark),
+          var(--purple-deep),
+          var(--purple-mid)
+        );
+        padding: 20px 36px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-family: "Poppins", sans-serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--white);
+      }
+
+      .logo span {
+        color: var(--purple-brand);
+      }
+
+      .top-bar-right {
+        text-align: right;
+      }
+
+      .doc-type {
+        font-family: "Poppins", sans-serif;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--purple-light);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
+      .doc-date {
+        font-size: 0.625rem;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .hero {
+        background: linear-gradient(
+          135deg,
+          var(--purple-deep),
+          var(--purple-mid)
+        );
+        padding: 22px 36px;
+        color: var(--white);
+      }
+
+      .hero h1 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+
+      .hero p {
+        font-size: 0.8rem;
+        opacity: 0.8;
+        line-height: 1.5;
+        max-width: 600px;
+      }
+
+      .content {
+        padding: 18px 36px 0;
+      }
+
+      .section-label {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--purple-mid);
+        margin-bottom: 8px;
+        padding-bottom: 3px;
+        border-bottom: 2px solid var(--purple-brand);
+        display: inline-block;
+      }
+
+      /* ARCHITECTURE DIAGRAM */
+      .arch-diagram {
+        background: var(--gray-50);
+        border: 1px solid var(--gray-200);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 16px;
+        position: relative;
+      }
+
+      .arch-layer {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 6px;
+      }
+
+      .arch-box {
+        padding: 8px 14px;
+        border-radius: 6px;
+        font-size: 0.625rem;
+        font-weight: 600;
+        text-align: center;
+        min-width: 100px;
+      }
+
+      .arch-box.apps {
+        background: var(--blue-light);
+        color: var(--blue);
+        border: 1px solid #93c5fd;
+        flex: 1;
+      }
+
+      .arch-box.protocol {
+        background: var(--orange-light);
+        color: #92400e;
+        border: 1px solid #fcd34d;
+        min-width: 70px;
+      }
+
+      .arch-box.idp {
+        background: var(--purple-pale);
+        color: var(--purple-mid);
+        border: 1px solid #d8b4fe;
+        flex: 1;
+      }
+
+      .arch-box.product {
+        background: var(--white);
+        color: var(--purple-deep);
+        border: 1px solid var(--purple-brand);
+        flex: 1;
+      }
+
+      .arch-box.db {
+        background: var(--cyan-light);
+        color: #0e7490;
+        border: 1px solid #67e8f9;
+        flex: 1;
+      }
+
+      .arch-box .sub {
+        font-size: 0.5rem;
+        font-weight: 400;
+        opacity: 0.7;
+        display: block;
+        margin-top: 2px;
+      }
+
+      .arch-arrow {
+        text-align: center;
+        color: var(--gray-300);
+        font-size: 0.75rem;
+        margin: 2px 0;
+        letter-spacing: 4px;
+      }
+
+      .arch-protocols {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin: 4px 0;
+      }
+
+      /* TWO COL */
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 14px;
+      }
+
+      .three-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      /* PRODUCT CARDS */
+      .product-detail {
+        border-radius: 8px;
+        padding: 14px 16px;
+        border: 1px solid var(--gray-200);
+        background: var(--white);
+      }
+
+      .product-detail h3 {
+        font-size: 0.813rem;
+        color: var(--purple-mid);
+        margin-bottom: 2px;
+      }
+
+      .product-detail .target-label {
+        font-size: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--gray-500);
+        margin-bottom: 6px;
+      }
+
+      .product-detail p {
+        font-size: 0.625rem;
+        color: var(--gray-700);
+        line-height: 1.45;
+        margin-bottom: 6px;
+      }
+
+      .factor-pills {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+      }
+
+      .factor-pill {
+        font-size: 0.5rem;
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-weight: 500;
+      }
+
+      .factor-pill.bio {
+        background: #fce7f3;
+        color: #9d174d;
+      }
+      .factor-pill.device {
+        background: var(--blue-light);
+        color: var(--blue);
+      }
+      .factor-pill.intent {
+        background: var(--green-light);
+        color: #15803d;
+      }
+      .factor-pill.possess {
+        background: var(--orange-light);
+        color: #92400e;
+      }
+      .factor-pill.know {
+        background: var(--purple-pale);
+        color: var(--purple-mid);
+      }
+
+      /* CRYPTO SECTION */
+      .crypto-card {
+        border-radius: 8px;
+        padding: 14px 16px;
+        margin-bottom: 12px;
+      }
+
+      .crypto-card h3 {
+        font-size: 0.75rem;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .crypto-card ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .crypto-card li {
+        font-size: 0.625rem;
+        padding: 3px 0;
+        padding-left: 14px;
+        position: relative;
+        color: var(--gray-700);
+        line-height: 1.4;
+      }
+
+      .crypto-card li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 8px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+      }
+
+      .card-blue {
+        background: var(--blue-light);
+        border: 1px solid #93c5fd;
+      }
+      .card-blue h3 {
+        color: var(--blue);
+      }
+      .card-blue li::before {
+        background: var(--blue);
+      }
+
+      .card-green {
+        background: var(--green-light);
+        border: 1px solid #86efac;
+      }
+      .card-green h3 {
+        color: #15803d;
+      }
+      .card-green li::before {
+        background: var(--green);
+      }
+
+      .card-purple {
+        background: var(--purple-pale);
+        border: 1px solid #d8b4fe;
+      }
+      .card-purple h3 {
+        color: var(--purple-mid);
+      }
+      .card-purple li::before {
+        background: var(--purple-brand);
+      }
+
+      .card-cyan {
+        background: var(--cyan-light);
+        border: 1px solid #67e8f9;
+      }
+      .card-cyan h3 {
+        color: #0e7490;
+      }
+      .card-cyan li::before {
+        background: var(--cyan);
+      }
+
+      /* COMPARISON TABLE */
+      .compare-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.563rem;
+        margin-bottom: 14px;
+      }
+
+      .compare-table th {
+        background: var(--purple-deep);
+        color: var(--white);
+        padding: 6px 8px;
+        text-align: center;
+        font-weight: 500;
+      }
+
+      .compare-table th:first-child {
+        text-align: left;
+        border-radius: 4px 0 0 0;
+      }
+
+      .compare-table th:last-child {
+        border-radius: 0 4px 0 0;
+      }
+
+      .compare-table td {
+        padding: 5px 8px;
+        border-bottom: 1px solid var(--gray-200);
+        text-align: center;
+        color: var(--gray-700);
+      }
+
+      .compare-table td:first-child {
+        text-align: left;
+        font-weight: 500;
+        color: var(--gray-900);
+      }
+
+      .compare-table tr:nth-child(even) td {
+        background: var(--gray-50);
+      }
+
+      .check {
+        color: var(--green);
+        font-weight: 700;
+      }
+      .cross {
+        color: #dc2626;
+        font-weight: 700;
+      }
+      .partial {
+        color: var(--orange);
+        font-weight: 700;
+      }
+
+      /* INTEGRATIONS */
+      .integration-grid {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
+
+      .int-chip {
+        font-size: 0.563rem;
+        padding: 4px 10px;
+        background: var(--gray-50);
+        border: 1px solid var(--gray-200);
+        border-radius: 12px;
+        color: var(--gray-700);
+        font-weight: 500;
+      }
+
+      .int-chip.primary {
+        background: var(--purple-pale);
+        border-color: #d8b4fe;
+        color: var(--purple-mid);
+      }
+
+      /* FLOW DIAGRAMS */
+      .flow-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 8px;
+      }
+
+      .flow-step {
+        font-size: 0.563rem;
+        padding: 6px 10px;
+        border-radius: 6px;
+        text-align: center;
+        flex: 1;
+      }
+
+      .flow-arrow {
+        color: var(--gray-300);
+        font-size: 0.75rem;
+        flex-shrink: 0;
+      }
+
+      .flow-step.user {
+        background: var(--blue-light);
+        color: var(--blue);
+        border: 1px solid #93c5fd;
+      }
+      .flow-step.action {
+        background: var(--orange-light);
+        color: #92400e;
+        border: 1px solid #fcd34d;
+      }
+      .flow-step.system {
+        background: var(--purple-pale);
+        color: var(--purple-mid);
+        border: 1px solid #d8b4fe;
+      }
+      .flow-step.result {
+        background: var(--green-light);
+        color: #15803d;
+        border: 1px solid #86efac;
+      }
+
+      /* FOOTER */
+      .page-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--gray-50);
+        border-top: 1px solid var(--gray-200);
+        padding: 8px 36px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.5rem;
+        color: var(--gray-500);
+      }
+
+      .confidential {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #dc2626;
+        font-weight: 600;
+      }
+
+      @media print {
+        body {
+          width: 100%;
+        }
+        .page {
+          min-height: 11in;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ============ PAGE 1 ============ -->
+    <div class="page">
+      <div class="top-bar">
+        <div class="logo">Blok<span>Sec</span></div>
+        <div class="top-bar-right">
+          <div class="doc-type">Technical Architecture</div>
+          <div class="doc-date">
+            Sales Engineering Reference — February 2026
+          </div>
+        </div>
+      </div>
+
+      <div class="hero">
+        <h1>Platform Architecture & Technical Overview</h1>
+        <p>
+          How BlokSec delivers passwordless authentication for every worker —
+          from mobile-first 3-factor to deviceless QR badge MFA — through
+          asymmetric cryptography with zero server-side secrets.
+        </p>
+      </div>
+
+      <div class="content">
+        <!-- ARCHITECTURE DIAGRAM -->
+        <div class="section-label">System Architecture</div>
+        <div class="arch-diagram">
+          <div class="arch-layer">
+            <div class="arch-box apps">
+              Enterprise Applications<span class="sub"
+                >M365, Google Workspace, Salesforce, Custom Apps</span
+              >
+            </div>
+          </div>
+          <div class="arch-protocols">
+            <div class="arch-box protocol">OIDC</div>
+            <div class="arch-box protocol">SAML 2.0</div>
+            <div class="arch-box protocol">WS-Fed</div>
+          </div>
+          <div class="arch-arrow">▼ ▼ ▼</div>
+          <div class="arch-layer">
+            <div class="arch-box idp">
+              BlokSec Identity Provider (IdP)<span class="sub"
+                >Centralized authentication gateway — standard protocol
+                integration</span
+              >
+            </div>
+          </div>
+          <div class="arch-arrow">▼ ▼ ▼</div>
+          <div class="arch-layer">
+            <div class="arch-box product">
+              BlokKey<span class="sub">Mobile 3-Factor</span>
+            </div>
+            <div class="arch-box product">
+              BlokBadge<span class="sub">QR Badge + PIN</span>
+            </div>
+            <div class="arch-box product">
+              BlokSafe<span class="sub">Credential Vault</span>
+            </div>
+            <div class="arch-box product">
+              Admin<span class="sub">Management</span>
+            </div>
+          </div>
+          <div class="arch-arrow">▼ ▼ ▼</div>
+          <div class="arch-layer">
+            <div class="arch-box db">
+              MongoDB<span class="sub">Configuration</span>
+            </div>
+            <div class="arch-box db">
+              DynamoDB<span class="sub">Runtime / Sessions</span>
+            </div>
+            <div class="arch-box db">
+              Immutable DB<span class="sub">Audit Trail (Append-Only)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT DETAILS -->
+        <div class="section-label">Authentication Products</div>
+        <div class="two-col">
+          <div class="product-detail">
+            <h3>BlokKey — Mobile Passwordless MFA</h3>
+            <div class="target-label">Knowledge Workers / Office Staff</div>
+            <p>
+              Push notification to registered device → Biometric confirmation →
+              Intent verification → Authenticated. No password at any point.
+            </p>
+            <p>
+              <strong>Key tech:</strong> HD wallet generates unique ECDSA key
+              pair per application. Private keys never leave device. Per-app
+              isolation prevents cross-app compromise.
+            </p>
+            <div class="factor-pills">
+              <span class="factor-pill bio">Biometric</span>
+              <span class="factor-pill device">Device</span>
+              <span class="factor-pill intent">Intent</span>
+              <span
+                style="
+                  font-size: 0.5rem;
+                  color: var(--gray-500);
+                  padding: 2px 4px;
+                "
+                >= 3-Factor MFA</span
+              >
+            </div>
+          </div>
+          <div class="product-detail">
+            <h3>BlokBadge — Deviceless MFA</h3>
+            <div class="target-label">Frontline / Floor Workers</div>
+            <p>
+              Scan printed QR badge at terminal → Enter personal PIN →
+              Authenticated. No smartphone, no hardware token, works with
+              gloves.
+            </p>
+            <p>
+              <strong>Key tech:</strong> Split-key cryptography. Badge holds Key
+              Fragment A, server holds Key Fragment B. Neither usable alone.
+              Badge prints in 30 seconds, deactivates instantly.
+            </p>
+            <div class="factor-pills">
+              <span class="factor-pill possess">Possession (Badge)</span>
+              <span class="factor-pill know">Knowledge (PIN)</span>
+              <span
+                style="
+                  font-size: 0.5rem;
+                  color: var(--gray-500);
+                  padding: 2px 4px;
+                "
+                >= 2-Factor MFA</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- AUTH FLOWS -->
+        <div class="section-label">Authentication Flows</div>
+        <div style="margin-bottom: 8px">
+          <div
+            style="
+              font-size: 0.625rem;
+              font-weight: 600;
+              color: var(--gray-700);
+              margin-bottom: 4px;
+            "
+          >
+            BlokKey Flow (Knowledge Workers)
+          </div>
+          <div class="flow-row">
+            <div class="flow-step user">User logs into app</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step system">BlokSec IdP sends push</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step action">
+              User confirms (biometric + intent)
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step result">Authenticated ✓</div>
+          </div>
+        </div>
+        <div style="margin-bottom: 14px">
+          <div
+            style="
+              font-size: 0.625rem;
+              font-weight: 600;
+              color: var(--gray-700);
+              margin-bottom: 4px;
+            "
+          >
+            BlokBadge Flow (Frontline Workers)
+          </div>
+          <div class="flow-row">
+            <div class="flow-step user">Worker scans QR badge</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step action">Enters personal PIN</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step system">Server combines key fragments</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step result">Authenticated ✓</div>
+          </div>
+        </div>
+
+        <!-- CRYPTOGRAPHIC FOUNDATIONS -->
+        <div class="section-label">Cryptographic Foundations</div>
+        <div class="three-col">
+          <div class="crypto-card card-blue">
+            <h3>ECDSA Asymmetric Crypto</h3>
+            <ul>
+              <li>No shared secrets between client and server</li>
+              <li>Private keys never transmitted over network</li>
+              <li>Eliminates MITM and replay attacks</li>
+              <li>Server compromise yields nothing usable</li>
+            </ul>
+          </div>
+          <div class="crypto-card card-green">
+            <h3>Split-Key Security (BlokBadge)</h3>
+            <ul>
+              <li>Badge: encrypted partial key (Fragment A)</li>
+              <li>Server: complementary key (Fragment B)</li>
+              <li>Both fragments required for auth</li>
+              <li>Lost badge = useless without server half</li>
+            </ul>
+          </div>
+          <div class="crypto-card card-purple">
+            <h3>HD Wallet Isolation (BlokKey)</h3>
+            <ul>
+              <li>Unique key pair per application</li>
+              <li>Hierarchical Deterministic derivation</li>
+              <li>Compromise of one app ≠ compromise of others</li>
+              <li>Keys derived, not stored in bulk</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- SECURITY COMPARISON -->
+        <div class="section-label">Security Comparison</div>
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>SMS / TOTP</th>
+              <th>Push (Duo/Okta)</th>
+              <th>FIDO2 Keys</th>
+              <th>BlokKey</th>
+              <th>BlokBadge</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Phishing resistant</td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="partial">~</span></td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+              <td><span class="partial">~</span> PIN-based</td>
+            </tr>
+            <tr>
+              <td>No server-side secrets</td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+              <td><span class="partial">~</span> Split-key</td>
+            </tr>
+            <tr>
+              <td>Works without smartphone</td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="check">✓</span></td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Works with gloves / PPE</td>
+              <td>N/A</td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="partial">~</span></td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Per-app key isolation</td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="check">✓</span> Origin-scoped</td>
+              <td><span class="check">✓</span></td>
+              <td>N/A</td>
+            </tr>
+            <tr>
+              <td>Immutable audit trail</td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="cross">✕</span></td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Zero replacement cost</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+              <td><span class="cross">✕</span> $25-90</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span> reprint</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- INTEGRATIONS -->
+        <div class="section-label">Supported Integrations</div>
+        <div class="integration-grid">
+          <span class="int-chip primary">Microsoft Entra ID</span>
+          <span class="int-chip primary">Google Workspace</span>
+          <span class="int-chip primary">Okta</span>
+          <span class="int-chip primary">Ping Identity</span>
+          <span class="int-chip">Salesforce</span>
+          <span class="int-chip">CyberArk</span>
+          <span class="int-chip">BeyondTrust</span>
+          <span class="int-chip">Delinea</span>
+          <span class="int-chip">Any OIDC App</span>
+          <span class="int-chip">Any SAML 2.0 App</span>
+          <span class="int-chip">Any WS-Fed App</span>
+        </div>
+
+        <div class="section-label">Data Architecture</div>
+        <div class="three-col" style="margin-bottom: 0">
+          <div class="crypto-card card-cyan" style="margin-bottom: 0">
+            <h3>MongoDB</h3>
+            <ul>
+              <li>User profiles & configuration</li>
+              <li>Application settings</li>
+              <li>Flexible schema for multi-tenant</li>
+            </ul>
+          </div>
+          <div class="crypto-card card-cyan" style="margin-bottom: 0">
+            <h3>DynamoDB</h3>
+            <ul>
+              <li>Runtime authentication events</li>
+              <li>Session management</li>
+              <li>Low-latency, high throughput</li>
+            </ul>
+          </div>
+          <div class="crypto-card card-cyan" style="margin-bottom: 0">
+            <h3>Immutable DB</h3>
+            <ul>
+              <li>Append-only audit trail</li>
+              <li>Tamper-proof compliance evidence</li>
+              <li>Cryptographically verified records</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span class="confidential">Confidential</span>
+        <span
+          >BlokSec Technical Architecture — February 2026 — Page 1 of 1</span
+        >
+      </div>
+    </div>
+  </body>
+</html>

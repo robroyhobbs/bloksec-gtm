@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlokSec MSP Partner Program</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @page {
+        size: letter;
+        margin: 0;
+      }
+
+      :root {
+        --purple-dark: #1a0a2e;
+        --purple-deep: #311043;
+        --purple-mid: #6b21a8;
+        --purple-brand: #a855f7;
+        --purple-light: #c084fc;
+        --purple-pale: #f3e8ff;
+        --green: #22c55e;
+        --orange: #f59e0b;
+        --white: #ffffff;
+        --gray-50: #f9fafb;
+        --gray-100: #f3f4f6;
+        --gray-200: #e5e7eb;
+        --gray-500: #6b7280;
+        --gray-700: #374151;
+        --gray-900: #111827;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        color: var(--gray-900);
+        background: var(--white);
+        width: 8.5in;
+        min-height: 11in;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Poppins", sans-serif;
+      }
+
+      .page {
+        width: 100%;
+        min-height: 11in;
+        padding: 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* TOP HEADER BAR */
+      .top-bar {
+        background: linear-gradient(
+          135deg,
+          var(--purple-dark),
+          var(--purple-deep)
+        );
+        padding: 28px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-family: "Poppins", sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--white);
+        letter-spacing: 1px;
+      }
+
+      .logo span {
+        color: var(--purple-brand);
+      }
+
+      .top-bar-right {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.7);
+        text-align: right;
+      }
+
+      /* HERO SECTION */
+      .hero {
+        background: linear-gradient(
+          135deg,
+          var(--purple-deep),
+          var(--purple-mid)
+        );
+        padding: 32px 40px;
+        color: var(--white);
+      }
+
+      .hero h1 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        line-height: 1.3;
+      }
+
+      .hero p {
+        font-size: 0.95rem;
+        opacity: 0.85;
+        max-width: 600px;
+        line-height: 1.5;
+      }
+
+      /* MAIN CONTENT */
+      .content {
+        padding: 28px 40px;
+      }
+
+      /* THE PROBLEM / SOLUTION STRIP */
+      .problem-solution {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-bottom: 28px;
+      }
+
+      .problem-box,
+      .solution-box {
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      .problem-box {
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+      }
+
+      .solution-box {
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+      }
+
+      .problem-box h3,
+      .solution-box h3 {
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 12px;
+      }
+
+      .problem-box h3 {
+        color: #dc2626;
+      }
+      .solution-box h3 {
+        color: #16a34a;
+      }
+
+      .problem-box ul,
+      .solution-box ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .problem-box li,
+      .solution-box li {
+        font-size: 0.813rem;
+        padding: 5px 0;
+        padding-left: 20px;
+        position: relative;
+        color: var(--gray-700);
+        line-height: 1.4;
+      }
+
+      .problem-box li::before {
+        content: "✕";
+        position: absolute;
+        left: 0;
+        color: #dc2626;
+        font-weight: 700;
+        font-size: 0.75rem;
+      }
+
+      .solution-box li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #16a34a;
+        font-weight: 700;
+      }
+
+      /* ECONOMICS TABLE */
+      .economics {
+        margin-bottom: 28px;
+      }
+
+      .economics h2 {
+        font-size: 1.1rem;
+        color: var(--purple-deep);
+        margin-bottom: 14px;
+        padding-bottom: 6px;
+        border-bottom: 2px solid var(--purple-brand);
+        display: inline-block;
+      }
+
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+      }
+
+      .metric-card {
+        background: var(--gray-50);
+        border: 1px solid var(--gray-200);
+        border-radius: 8px;
+        padding: 16px;
+        text-align: center;
+      }
+
+      .metric-card .number {
+        font-family: "Poppins", sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--purple-mid);
+        line-height: 1.2;
+      }
+
+      .metric-card .label {
+        font-size: 0.688rem;
+        color: var(--gray-500);
+        margin-top: 4px;
+        line-height: 1.3;
+      }
+
+      /* PRODUCTS SECTION */
+      .products {
+        margin-bottom: 28px;
+      }
+
+      .products h2 {
+        font-size: 1.1rem;
+        color: var(--purple-deep);
+        margin-bottom: 14px;
+        padding-bottom: 6px;
+        border-bottom: 2px solid var(--purple-brand);
+        display: inline-block;
+      }
+
+      .product-strip {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .product-card {
+        padding: 16px;
+        border-radius: 8px;
+        border: 1px solid var(--gray-200);
+        background: var(--white);
+      }
+
+      .product-card h4 {
+        font-size: 0.875rem;
+        color: var(--purple-mid);
+        margin-bottom: 4px;
+      }
+
+      .product-card .target {
+        font-size: 0.688rem;
+        color: var(--gray-500);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+      }
+
+      .product-card p {
+        font-size: 0.75rem;
+        color: var(--gray-700);
+        line-height: 1.4;
+      }
+
+      /* PARTNER TIERS */
+      .tiers {
+        margin-bottom: 28px;
+      }
+
+      .tiers h2 {
+        font-size: 1.1rem;
+        color: var(--purple-deep);
+        margin-bottom: 14px;
+        padding-bottom: 6px;
+        border-bottom: 2px solid var(--purple-brand);
+        display: inline-block;
+      }
+
+      .tiers-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.75rem;
+      }
+
+      .tiers-table th {
+        background: var(--purple-deep);
+        color: var(--white);
+        padding: 10px 12px;
+        text-align: left;
+        font-weight: 500;
+      }
+
+      .tiers-table th:first-child {
+        border-radius: 6px 0 0 0;
+      }
+      .tiers-table th:last-child {
+        border-radius: 0 6px 0 0;
+      }
+
+      .tiers-table td {
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--gray-200);
+        color: var(--gray-700);
+      }
+
+      .tiers-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .tiers-table tr:nth-child(even) td {
+        background: var(--gray-50);
+      }
+
+      .tier-name {
+        font-weight: 600;
+        color: var(--purple-mid);
+      }
+
+      /* COMPLIANCE BAR */
+      .compliance-bar {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 28px;
+        padding: 16px;
+        background: var(--purple-pale);
+        border-radius: 8px;
+      }
+
+      .compliance-bar .label {
+        font-size: 0.688rem;
+        font-weight: 600;
+        color: var(--purple-mid);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        width: 100%;
+        margin-bottom: 4px;
+      }
+
+      .compliance-chip {
+        font-size: 0.688rem;
+        padding: 4px 10px;
+        background: var(--white);
+        color: var(--purple-mid);
+        border-radius: 12px;
+        font-weight: 500;
+        border: 1px solid var(--purple-brand);
+      }
+
+      /* CTA FOOTER */
+      .cta-footer {
+        background: linear-gradient(
+          135deg,
+          var(--purple-dark),
+          var(--purple-deep)
+        );
+        padding: 24px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .cta-footer .cta-text h3 {
+        color: var(--white);
+        font-size: 1rem;
+        margin-bottom: 4px;
+      }
+
+      .cta-footer .cta-text p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.813rem;
+      }
+
+      .cta-btn {
+        background: var(--purple-brand);
+        color: var(--white);
+        padding: 12px 28px;
+        border-radius: 8px;
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        font-size: 0.875rem;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      @media print {
+        body {
+          width: 100%;
+        }
+        .page {
+          min-height: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <!-- TOP BAR -->
+      <div class="top-bar">
+        <div class="logo">Blok<span>Sec</span></div>
+        <div class="top-bar-right">
+          MSP Partner Program<br />
+          bloksec.com
+        </div>
+      </div>
+
+      <!-- HERO -->
+      <div class="hero">
+        <h1>Add Passwordless MFA to Your MSP Portfolio</h1>
+        <p>
+          Eliminate your clients' #1 help desk cost while adding high-margin
+          recurring revenue. Built specifically for frontline workers who can't
+          use phone-based MFA.
+        </p>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="content">
+        <!-- PROBLEM / SOLUTION -->
+        <div class="problem-solution">
+          <div class="problem-box">
+            <h3>The Problem Your Clients Have</h3>
+            <ul>
+              <li>
+                Floor workers can't use phone-based MFA — no devices allowed
+              </li>
+              <li>Password resets eat 40% of help desk time at $70 each</li>
+              <li>Compliance audits flagging shared credentials</li>
+              <li>High turnover = constant onboarding friction</li>
+              <li>
+                Over 50% of breaches involve stolen/weak credentials (Verizon
+                DBIR 2025)
+              </li>
+            </ul>
+          </div>
+          <div class="solution-box">
+            <h3>The BlokSec Solution</h3>
+            <ul>
+              <li>
+                <strong>BlokBadge:</strong> QR badge + PIN = 2FA, no phone
+                needed
+              </li>
+              <li>
+                <strong>BlokKey:</strong> Mobile 3-factor for knowledge workers
+              </li>
+              <li>Integrates with Entra ID, Google, Okta, Ping</li>
+              <li>Asymmetric crypto — nothing stored server-side to breach</li>
+              <li>Immutable audit trail for compliance evidence</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ECONOMICS -->
+        <div class="economics">
+          <h2>MSP Economics</h2>
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="number">$3-5</div>
+              <div class="label">Per User / Month<br />List Price</div>
+            </div>
+            <div class="metric-card">
+              <div class="number">40-55%</div>
+              <div class="label">Partner<br />Margins</div>
+            </div>
+            <div class="metric-card">
+              <div class="number">30-40%</div>
+              <div class="label">Help Desk Ticket<br />Reduction</div>
+            </div>
+            <div class="metric-card">
+              <div class="number">&lt;1 day</div>
+              <div class="label">Typical<br />Deployment</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCTS -->
+        <div class="products">
+          <h2>Product Suite</h2>
+          <div class="product-strip">
+            <div class="product-card">
+              <h4>BlokBadge</h4>
+              <div class="target">FRONTLINE WORKERS</div>
+              <p>
+                Printed QR badge + PIN provides 2-factor MFA for workers without
+                personal devices. Works with gloves, in clean rooms, and
+                high-turnover environments. New badge prints in 30 seconds.
+              </p>
+            </div>
+            <div class="product-card">
+              <h4>BlokKey</h4>
+              <div class="target">KNOWLEDGE WORKERS</div>
+              <p>
+                Mobile-first passwordless MFA combining biometric + device +
+                intent verification for 3-factor authentication. HD wallet
+                provides per-app key isolation. Push-button approval.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PARTNER TIERS -->
+        <div class="tiers">
+          <h2>Partner Tiers</h2>
+          <table class="tiers-table">
+            <thead>
+              <tr>
+                <th>Tier</th>
+                <th>Commitment</th>
+                <th>Margin</th>
+                <th>Support</th>
+                <th>Ideal For</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tier-name">Referral</span></td>
+                <td>No minimum</td>
+                <td>20% referral fee</td>
+                <td>Sales collateral</td>
+                <td>Testing the waters</td>
+              </tr>
+              <tr>
+                <td><span class="tier-name">Reseller</span></td>
+                <td>25+ seats</td>
+                <td>40%</td>
+                <td>+ Partner portal, co-marketing</td>
+                <td>Active MSPs with clients ready</td>
+              </tr>
+              <tr>
+                <td><span class="tier-name">Strategic</span></td>
+                <td>100+ seats</td>
+                <td>55%</td>
+                <td>+ Dedicated SE, white-label option</td>
+                <td>MSPs making security a practice</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- COMPLIANCE -->
+        <div class="compliance-bar">
+          <div class="label">Compliance Coverage</div>
+          <span class="compliance-chip">PCI DSS 4.0</span>
+          <span class="compliance-chip">FDA 21 CFR Part 11</span>
+          <span class="compliance-chip">SOC 2</span>
+          <span class="compliance-chip">NERC CIP</span>
+          <span class="compliance-chip">NIST 800-63B</span>
+          <span class="compliance-chip">CMMC 2.0</span>
+        </div>
+      </div>
+
+      <!-- CTA FOOTER -->
+      <div class="cta-footer">
+        <div class="cta-text">
+          <h3>Ready to explore a partnership?</h3>
+          <p>15-minute demo — see BlokBadge in action for your clients</p>
+        </div>
+        <a
+          class="cta-btn"
+          href="mailto:partners@bloksec.com?subject=Partner%20Demo%20Request"
+          >Book Partner Demo</a
+        >
+      </div>
+    </div>
+  </body>
+</html>
