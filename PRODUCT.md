@@ -28,6 +28,7 @@ MSPs and partners are the primary scale channel for the initial motion.
 - Legacy resource hub identified in prior research assets
 - New GTM repo and GitHub Pages-ready hub scaffolded here
 - Next focus: migrate the best assets, sharpen industry pages, and close live-site gaps
+- Companion source of truth added: `PRODUCT_CONTEXT.md` for claims and capability validation
 
 ## Success signals
 - Clear industry-specific messaging for frontline-heavy buyers

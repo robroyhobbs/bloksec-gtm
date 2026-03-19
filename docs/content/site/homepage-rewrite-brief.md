@@ -42,7 +42,7 @@ Lead with eliminated password reset friction, lower help-desk burden, and easier
 Emphasize worker accountability, faster sign-in, and cleaner audit trails where credentials are often shared today.
 
 ### 4. Fit existing identity stacks
-Position BlokSec as a layer that works with Microsoft Entra ID, Google Workspace, Okta, Ping, and similar environments.
+Position BlokSec as a layer that fits alongside Microsoft environments, Google Workspace, Okta, and similar standards-based environments.
 
 ## Suggested section order
 1. Hero

@@ -4,393 +4,304 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BlokSec GTM Resource Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-    <style>
-      :root {
-        --bg: #f8fafc;
-        --card: #ffffff;
-        --text: #0f172a;
-        --muted: #475569;
-        --line: #dbe4ee;
-        --brand-dark: #1a0a2e;
-        --brand-mid: #6b21a8;
-        --brand: #a855f7;
-        --brand-soft: #f3e8ff;
-      }
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: Inter, system-ui, sans-serif;
-        background: var(--bg);
-        color: var(--text);
-      }
-      .hero {
-        background: linear-gradient(135deg, var(--brand-dark), #311043);
-        color: white;
-        padding: 56px 24px 44px;
-      }
-      .hero-inner, .container { max-width: 1100px; margin: 0 auto; }
-      .eyebrow {
-        color: #d8b4fe;
-        font-size: 0.85rem;
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        margin-bottom: 12px;
-      }
-      h1, h2, h3 { font-family: Poppins, Inter, sans-serif; margin: 0; }
-      h1 {
-        font-size: clamp(2rem, 4vw, 3.4rem);
-        line-height: 1.05;
-        margin-bottom: 14px;
-      }
-      .hero p {
-        max-width: 820px;
-        font-size: 1.05rem;
-        line-height: 1.7;
-        color: rgba(255,255,255,0.82);
-      }
-      .status {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 16px;
-        margin-top: 28px;
-      }
-      .status-card, .card {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 14px;
-      }
-      .status-card {
-        padding: 18px;
-        color: var(--text);
-      }
-      .status-card .label {
-        color: var(--muted);
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        margin-bottom: 6px;
-      }
-      .status-card .value {
-        font-family: Poppins, sans-serif;
-        color: var(--brand-mid);
-        font-weight: 600;
-      }
-      .container { padding: 36px 24px 64px; }
-      .section { margin-top: 40px; }
-      .section h2 {
-        font-size: 1.35rem;
-        margin-bottom: 10px;
-      }
-      .section p.section-copy {
-        color: var(--muted);
-        margin: 0 0 18px;
-        max-width: 820px;
-        line-height: 1.7;
-      }
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 16px;
-      }
-      a.card {
-        display: block;
-        text-decoration: none;
-        color: inherit;
-        padding: 20px;
-        transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-      }
-      a.card:hover {
-        transform: translateY(-2px);
-        border-color: #c084fc;
-        box-shadow: 0 8px 24px rgba(49, 16, 67, 0.08);
-      }
-      .tag {
-        display: inline-block;
-        margin-bottom: 10px;
-        padding: 4px 10px;
-        border-radius: 999px;
-        background: var(--brand-soft);
-        color: var(--brand-mid);
-        font-size: 0.72rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-      .card h3 {
-        font-size: 1rem;
-        margin-bottom: 8px;
-      }
-      .card p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.6;
-        font-size: 0.92rem;
-      }
-      .footer {
-        padding: 24px;
-        text-align: center;
-        color: var(--muted);
-        font-size: 0.9rem;
-      }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="site/styles.css" />
   </head>
   <body>
-    <header class="hero">
-      <div class="hero-inner">
-        <div class="eyebrow">BlokSec GTM</div>
-        <h1>Resource hub for frontline-first passwordless GTM</h1>
-        <p>
-          This hub brings together the refreshed BlokSec thesis, the strongest legacy research,
-          industry entry points, partner assets, and the immediate work needed to sharpen the
-          company around SMB and mid-market buyers with shared-device and frontline authentication pain.
-        </p>
-        <div class="status">
-          <div class="status-card">
-            <div class="label">Primary ICP</div>
-            <div class="value">SMB + Mid-market</div>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a class="brand-lockup" href="index.html">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <div>
+            <div class="brand-title">BlokSec GTM</div>
+            <div class="brand-subtitle">Strategy hub, prototypes, and partner engine</div>
           </div>
-          <div class="status-card">
-            <div class="label">Wedge</div>
-            <div class="value">Frontline + Shared Devices</div>
-          </div>
-          <div class="status-card">
-            <div class="label">Channel</div>
-            <div class="value">MSP / Partner</div>
-          </div>
-          <div class="status-card">
-            <div class="label">Updated</div>
-            <div class="value">March 2026</div>
-          </div>
-        </div>
+        </a>
+        <nav class="nav-links">
+          <a href="#featured">Featured</a>
+          <a href="#rewrite">Site rewrite</a>
+          <a href="#research">Research</a>
+          <a href="#industries">Industries</a>
+          <a href="#partners">Partners</a>
+          <a href="#tools">Tools</a>
+        </nav>
       </div>
     </header>
 
-    <main class="container">
-      <section class="section">
-        <h2>Start here</h2>
-        <p class="section-copy">Use these pages first if you want the current picture fast: what still holds, what changed, what the hub should become, and what to do next.</p>
-        <div class="grid">
-          <a class="card" href="md-viewer.html?file=content/audit/research-revisit-2026-03.md">
-            <div class="tag">Audit</div>
-            <h3>Research revisit</h3>
-            <p>Current synthesis of the market, website, positioning, and GTM gaps.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/audit/github-pages-sitemap.md">
-            <div class="tag">Pages</div>
-            <h3>GitHub Pages sitemap</h3>
-            <p>Recommended public hub structure, navigation, and audience paths.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/audit/next-actions.md">
-            <div class="tag">Action</div>
-            <h3>Immediate next actions</h3>
-            <p>What to fix, migrate, tighten, and publish next.</p>
-          </a>
-          <a class="card" href="assets/source-decks/bloksec-technical-sales-deck.pdf">
-            <div class="tag">Source deck</div>
-            <h3>Technical sales deck</h3>
-            <p>Direct download of the core BlokSec technical deck for reference.</p>
-          </a>
+    <main>
+      <section class="page-hero">
+        <div class="container hero-shell">
+          <article class="hero-panel hero-primary">
+            <div class="eyebrow">March 2026 GTM command center</div>
+            <h1 class="page-title">BlokSec’s <span class="gradient-text">frontline-first</span> GTM hub.</h1>
+            <p>
+              A polished operating layer for BlokSec’s next phase: sharpen the message, tighten the proof,
+              publish better resources, and turn the frontline/shared-device wedge into a clearer growth motion
+              across SMB and mid-market buyers.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="site/homepage.html">View homepage prototype</a>
+              <a class="button button-secondary" href="site/demo.html">Open demo prototype</a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat-pill">
+                <div class="label">Primary ICP</div>
+                <div class="value">SMB + Mid-market</div>
+              </div>
+              <div class="stat-pill">
+                <div class="label">Wedge</div>
+                <div class="value">Frontline + Shared devices</div>
+              </div>
+              <div class="stat-pill">
+                <div class="label">Channel</div>
+                <div class="value">MSP / Partner led</div>
+              </div>
+              <div class="stat-pill">
+                <div class="label">Live Pages</div>
+                <div class="value">Published on GitHub Pages</div>
+              </div>
+            </div>
+          </article>
+
+          <aside class="hero-panel hero-side">
+            <div class="eyebrow">What changed</div>
+            <p>
+              The old resource hub is now a stronger, more premium system: strategy, copy, partner materials,
+              source hygiene, prototypes, and publish-ready content in one place.
+            </p>
+            <div class="hero-side-stack">
+              <div class="info-tile">
+                <div class="card-meta">Live URLs</div>
+                <h3>Published and shareable</h3>
+                <p>GitHub repo, public Pages hub, homepage prototype, and demo prototype are all live.</p>
+              </div>
+              <div class="info-tile">
+                <div class="card-meta">Design direction</div>
+                <h3>Trust + high-tech boutique</h3>
+                <p>Richer glass layers, better hierarchy, premium typography, and brand-led gradients without losing clarity.</p>
+              </div>
+              <div class="info-tile">
+                <div class="card-meta">Next leverage</div>
+                <h3>Rewrite the real site</h3>
+                <p>The hub now contains enough structure and copy to move from strategy into a direct `bloksec.com` rebuild.</p>
+              </div>
+            </div>
+          </aside>
         </div>
       </section>
 
-      <section class="section">
-        <h2>Site rewrite and conversion fixes</h2>
-        <p class="section-copy">Use these when translating the audit into a stronger live-site narrative and a cleaner conversion path.</p>
-        <div class="grid">
-          <a class="card" href="site/homepage.html">
-            <div class="tag">Prototype</div>
-            <h3>Homepage prototype</h3>
-            <p>Actual HTML prototype for the sharpened frontline-first site homepage.</p>
-          </a>
-          <a class="card" href="site/demo.html">
-            <div class="tag">Prototype</div>
-            <h3>Demo-page prototype</h3>
-            <p>Actual HTML prototype for the improved demo conversion path.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/site/homepage-rewrite-brief.md">
-            <div class="tag">Site</div>
-            <h3>Homepage rewrite brief</h3>
-            <p>Copy and structure guidance for a sharper frontline-first homepage.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/site/live-site-fixes.md">
-            <div class="tag">Site</div>
-            <h3>Live-site fixes</h3>
-            <p>Concrete issues and execution order for repairing the current site.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/site/homepage-copy-draft.md">
-            <div class="tag">Copy draft</div>
-            <h3>Homepage copy draft</h3>
-            <p>Copy-ready homepage structure based on the sharpened frontline wedge.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/site/demo-page-copy-draft.md">
-            <div class="tag">Copy draft</div>
-            <h3>Demo page copy draft</h3>
-            <p>Focused conversion-page draft for a better demo experience.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/site/trial-vs-demo-decision.md">
-            <div class="tag">Offer design</div>
-            <h3>Trial vs demo decision</h3>
-            <p>Recommended path for replacing the ambiguous free-trial experience.</p>
-          </a>
+      <section id="featured" class="section-block">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-label">Featured now</div>
+            <h2>Start with the highest-leverage assets.</h2>
+            <p>These are the pages and packets that matter most right now: the live prototypes, the refreshed audit, and the concrete next-step plan.</p>
+          </div>
+          <div class="stack-grid">
+            <a class="tile dark span-7" href="site/homepage.html">
+              <div class="icon-chip">HP</div>
+              <div class="card-meta">Prototype · Live HTML</div>
+              <h3>Homepage prototype</h3>
+              <p>A premium, frontline-first homepage direction with stronger hierarchy, better CTAs, and clearer stack-fit messaging.</p>
+              <div class="inline-list">
+                <span class="inline-pill">Shared-device wedge</span>
+                <span class="inline-pill">Conversion-focused hero</span>
+                <span class="inline-pill">Premium visual system</span>
+              </div>
+            </a>
+            <a class="tile span-5" href="site/demo.html">
+              <div class="icon-chip">DM</div>
+              <div class="card-meta">Prototype · Live HTML</div>
+              <h3>Demo-page prototype</h3>
+              <p>A cleaner conversion path with explicit audience routing and a better demo-versus-pilot story.</p>
+            </a>
+            <a class="tile span-4" href="md-viewer.html?file=content/audit/research-revisit-2026-03.md">
+              <div class="icon-chip">AU</div>
+              <div class="card-meta">Audit</div>
+              <h3>Research revisit</h3>
+              <p>What still holds, what changed, and what is missing after the March 2026 review.</p>
+            </a>
+            <a class="tile span-4" href="md-viewer.html?file=content/audit/next-actions.md">
+              <div class="icon-chip">NX</div>
+              <div class="card-meta">Execution</div>
+              <h3>Immediate next actions</h3>
+              <p>The concrete short list for fixing the live site, sharpening proof, and expanding the hub.</p>
+            </a>
+            <a class="tile span-4" href="assets/source-decks/bloksec-technical-sales-deck.pdf">
+              <div class="icon-chip">SD</div>
+              <div class="card-meta">Source deck</div>
+              <h3>Technical sales deck</h3>
+              <p>The original deck that still contains useful technical and messaging foundations.</p>
+            </a>
+          </div>
         </div>
       </section>
 
-      <section class="section">
-        <h2>Core research and strategy</h2>
-        <p class="section-copy">These are the foundational docs that explain the market, the product angle, the compliance pressure, and the proposed channel motion.</p>
-        <div class="grid">
-          <a class="card" href="md-viewer.html?file=content/research/bloksec-strategy-framework.md">
-            <div class="tag">Research</div>
-            <h3>Strategy framework</h3>
-            <p>The original long-form GTM and market framework.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/research/frontline-passwordless-auth-market-research.md">
-            <div class="tag">Research</div>
-            <h3>Frontline market research</h3>
-            <p>Deep dive on deskless and shared-device authentication pain.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/context/positioning.md">
-            <div class="tag">Context</div>
-            <h3>Positioning framework</h3>
-            <p>Core messaging for MSPs, IT buyers, and frontline-heavy verticals.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/strategy/gtm-plan.md">
-            <div class="tag">Strategy</div>
-            <h3>GTM plan</h3>
-            <p>Phased execution plan for validation, foundation, and scale.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/context/compliance.md">
-            <div class="tag">Compliance</div>
-            <h3>Compliance map</h3>
-            <p>Retail, manufacturing, healthcare, utilities, and broader regulatory context.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/context/competitors.md">
-            <div class="tag">Competition</div>
-            <h3>Competitor landscape</h3>
-            <p>Battlecard-style overview of the major alternatives and threats.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/research/source-hygiene-and-metrics-cleanup.md">
-            <div class="tag">Source hygiene</div>
-            <h3>Metrics cleanup guide</h3>
-            <p>How to separate strong claims from weak or internal-only numbers.</p>
-          </a>
+      <section id="rewrite" class="section-block">
+        <div class="container section-surface">
+          <div class="section-header">
+            <div class="section-label">Site rewrite system</div>
+            <h2>Everything needed to rebuild the public site.</h2>
+            <p>Use these when translating the audit into a stronger live-site narrative, cleaner offer design, and better conversion flow.</p>
+          </div>
+          <div class="card-grid">
+            <a class="tile highlight" href="site/homepage.html">
+              <div class="icon-chip">01</div>
+              <div class="card-meta">Prototype</div>
+              <h3>Homepage prototype</h3>
+              <p>The best starting point for a real homepage redesign using BlokSec’s purple identity with a more premium finish.</p>
+            </a>
+            <a class="tile highlight" href="site/demo.html">
+              <div class="icon-chip">02</div>
+              <div class="card-meta">Prototype</div>
+              <h3>Demo-page prototype</h3>
+              <p>A stronger intake flow for end buyers, partners, and frontline-heavy evaluations.</p>
+            </a>
+            <a class="tile" href="md-viewer.html?file=content/site/homepage-rewrite-brief.md">
+              <div class="icon-chip">03</div>
+              <div class="card-meta">Brief</div>
+              <h3>Homepage rewrite brief</h3>
+              <p>Page structure, message priorities, and hero framing for the public site.</p>
+            </a>
+            <a class="tile" href="md-viewer.html?file=content/site/homepage-copy-draft.md">
+              <div class="icon-chip">04</div>
+              <div class="card-meta">Copy</div>
+              <h3>Homepage copy draft</h3>
+              <p>Copy-ready page draft aligned to the sharpened wedge and repositioned offer.</p>
+            </a>
+            <a class="tile" href="md-viewer.html?file=content/site/demo-page-copy-draft.md">
+              <div class="icon-chip">05</div>
+              <div class="card-meta">Copy</div>
+              <h3>Demo-page copy draft</h3>
+              <p>Focused conversion-page draft for a better guided-demo experience.</p>
+            </a>
+            <a class="tile" href="md-viewer.html?file=content/site/trial-vs-demo-decision.md">
+              <div class="icon-chip">06</div>
+              <div class="card-meta">Offer design</div>
+              <h3>Trial vs demo decision</h3>
+              <p>Recommended near-term offer path: demo-first, guided pilots for qualified buyers, NFR for partners.</p>
+            </a>
+            <a class="tile" href="md-viewer.html?file=content/site/live-site-fixes.md">
+              <div class="icon-chip">07</div>
+              <div class="card-meta">Fix list</div>
+              <h3>Live-site fixes</h3>
+              <p>Repair order for conversion surfaces, messaging gaps, and credibility issues.</p>
+            </a>
+          </div>
         </div>
       </section>
 
-      <section class="section">
-        <h2>Industry plays</h2>
-        <p class="section-copy">These are the initial vertical briefs for the segments where fast authentication, shared-device accountability, and reset elimination matter most.</p>
-        <div class="grid">
-          <a class="card" href="md-viewer.html?file=content/industry/manufacturing.md">
-            <div class="tag">Industry</div>
-            <h3>Manufacturing</h3>
-            <p>Plant-floor workflows, gloves, regulated operations, and shared terminals.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/industry/retail.md">
-            <div class="tag">Industry</div>
-            <h3>Retail</h3>
-            <p>POS environments, turnover, seasonal hiring, and PCI-driven urgency.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/industry/warehousing-logistics.md">
-            <div class="tag">Industry</div>
-            <h3>Warehousing and logistics</h3>
-            <p>Shared devices, shift changes, cold environments, and distributed facilities.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/industry/food-processing.md">
-            <div class="tag">Industry</div>
-            <h3>Food processing</h3>
-            <p>Gloves, hygiene constraints, and controlled-environment authentication needs.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/industry/care-settings.md">
-            <div class="tag">Industry</div>
-            <h3>Care settings</h3>
-            <p>Shared stations, urgent workflows, and lean-team compliance realities.</p>
-          </a>
+      <section id="research" class="section-block">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-label">Research and strategy</div>
+            <h2>Core GTM foundation.</h2>
+            <p>These are the strategic documents behind the hub: market framing, positioning, compliance, products, pricing, and the operating plan.</p>
+          </div>
+          <div class="stack-grid">
+            <a class="tile span-6" href="md-viewer.html?file=content/research/bloksec-strategy-framework.md">
+              <div class="icon-chip">SF</div>
+              <div class="card-meta">Research</div>
+              <h3>Strategy framework</h3>
+              <p>The long-form GTM and market framework that still anchors the motion.</p>
+            </a>
+            <a class="tile span-6" href="md-viewer.html?file=content/research/frontline-passwordless-auth-market-research.md">
+              <div class="icon-chip">FM</div>
+              <div class="card-meta">Research</div>
+              <h3>Frontline market research</h3>
+              <p>Deeper analysis of deskless, shared-device, and high-friction authentication environments.</p>
+            </a>
+            <a class="tile span-4" href="md-viewer.html?file=content/context/positioning.md">
+              <div class="icon-chip">PO</div>
+              <div class="card-meta">Context</div>
+              <h3>Positioning</h3>
+              <p>Audience-level messaging for MSPs, IT buyers, and industry-specific conversations.</p>
+            </a>
+            <a class="tile span-4" href="md-viewer.html?file=content/context/compliance.md">
+              <div class="icon-chip">CP</div>
+              <div class="card-meta">Context</div>
+              <h3>Compliance map</h3>
+              <p>Retail, manufacturing, healthcare, utilities, and broader regulatory pressure.</p>
+            </a>
+            <a class="tile span-4" href="md-viewer.html?file=content/context/competitors.md">
+              <div class="icon-chip">CO</div>
+              <div class="card-meta">Context</div>
+              <h3>Competitors</h3>
+              <p>The broader competitive landscape and where BlokSec must tighten its story.</p>
+            </a>
+            <a class="tile span-6" href="md-viewer.html?file=content/strategy/gtm-plan.md">
+              <div class="icon-chip">GP</div>
+              <div class="card-meta">Strategy</div>
+              <h3>GTM plan</h3>
+              <p>Phased validation, foundation, and scale plan for BlokSec’s current motion.</p>
+            </a>
+            <a class="tile span-6" href="md-viewer.html?file=content/research/source-hygiene-and-metrics-cleanup.md">
+              <div class="icon-chip">SH</div>
+              <div class="card-meta">Source hygiene</div>
+              <h3>Metrics cleanup guide</h3>
+              <p>How to separate strong claims from weak or internal-only numbers before public publishing.</p>
+            </a>
+          </div>
         </div>
       </section>
 
-      <section class="section">
-        <h2>Partner and content engine</h2>
-        <p class="section-copy">These docs support the MSP motion and the repeatable publishing engine behind it.</p>
-        <div class="grid">
-          <a class="card" href="md-viewer.html?file=content/partner/program-outline.md">
-            <div class="tag">Partner</div>
-            <h3>Partner program outline</h3>
-            <p>Simple starting shape for tiers, value, and enablement requirements.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/strategy/msp-channel.md">
-            <div class="tag">Partner</div>
-            <h3>MSP channel strategy</h3>
-            <p>Who to target, why the channel fits, and what the program needs.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/partner/battlecards/microsoft-entra-qr-and-pin.md">
-            <div class="tag">Battlecard</div>
-            <h3>Entra QR + PIN response</h3>
-            <p>Current framing for the most important frontline competitive threat.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/partner/battlecards/cisco-duo.md">
-            <div class="tag">Battlecard</div>
-            <h3>Duo response</h3>
-            <p>How to frame device assumptions and frontline workflow fit.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/partner/battlecards/oloid.md">
-            <div class="tag">Battlecard</div>
-            <h3>OLOID response</h3>
-            <p>How to position BlokSec against a frontline-focused competitor.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/partner/battlecards/secret-double-octopus.md">
-            <div class="tag">Battlecard</div>
-            <h3>SDO response</h3>
-            <p>How to frame BlokSec against a stronger passwordless category player.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/playbooks/msp-outreach-sequences.md">
-            <div class="tag">Playbook</div>
-            <h3>MSP outreach sequences</h3>
-            <p>Email and LinkedIn sequences for manufacturing and retail-focused MSPs.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/playbooks/content-engine-templates.md">
-            <div class="tag">Playbook</div>
-            <h3>Content engine templates</h3>
-            <p>Templates for breach analysis, compliance guides, and industry pages.</p>
-          </a>
-          <a class="card" href="md-viewer.html?file=content/playbooks/msp-list-building-playbook.md">
-            <div class="tag">Playbook</div>
-            <h3>MSP list-building playbook</h3>
-            <p>Sources, scoring, and outreach optimization for partner targeting.</p>
-          </a>
+      <section id="industries" class="section-block">
+        <div class="container section-surface">
+          <div class="section-header">
+            <div class="section-label">Industry plays</div>
+            <h2>Priority verticals where the wedge is strongest.</h2>
+            <p>These briefs are the first layer for industry-specific landing pages, campaigns, and partner conversations.</p>
+          </div>
+          <div class="card-grid">
+            <a class="tile highlight" href="md-viewer.html?file=content/industry/manufacturing.md"><div class="icon-chip">MN</div><div class="card-meta">Industry</div><h3>Manufacturing</h3><p>Plant-floor workflows, PPE, regulated operations, and shared terminals.</p></a>
+            <a class="tile highlight" href="md-viewer.html?file=content/industry/retail.md"><div class="icon-chip">RT</div><div class="card-meta">Industry</div><h3>Retail</h3><p>POS environments, turnover, seasonal hiring, and PCI pressure.</p></a>
+            <a class="tile highlight" href="md-viewer.html?file=content/industry/warehousing-logistics.md"><div class="icon-chip">WL</div><div class="card-meta">Industry</div><h3>Warehousing + logistics</h3><p>Shared devices, shift changes, cold environments, and distributed operations.</p></a>
+            <a class="tile highlight" href="md-viewer.html?file=content/industry/food-processing.md"><div class="icon-chip">FP</div><div class="card-meta">Industry</div><h3>Food processing</h3><p>Hygiene-constrained environments with glove-heavy workflows and strong accountability needs.</p></a>
+            <a class="tile highlight" href="md-viewer.html?file=content/industry/care-settings.md"><div class="icon-chip">CS</div><div class="card-meta">Industry</div><h3>Care settings</h3><p>Shared stations, urgent workflows, and lean-team trust requirements.</p></a>
+          </div>
         </div>
       </section>
 
-      <section class="section">
-        <h2>Tools and collateral</h2>
-        <p class="section-copy">Existing collateral from the earlier resource hub that is still worth keeping around and upgrading.</p>
-        <div class="grid">
-          <a class="card" href="tools/roi-calculator.html">
-            <div class="tag">Tool</div>
-            <h3>ROI calculator</h3>
-            <p>Interactive calculator for reset-cost, productivity, and payback storytelling.</p>
-          </a>
-          <a class="card" href="tools/msp-partner-one-pager.html">
-            <div class="tag">Collateral</div>
-            <h3>MSP partner one-pager</h3>
-            <p>Quick partner-facing overview with economics and positioning.</p>
-          </a>
-          <a class="card" href="tools/technical-overview.html">
-            <div class="tag">Technical</div>
-            <h3>Technical overview</h3>
-            <p>Architecture and technical explanation for technical buyers and partners.</p>
-          </a>
-          <a class="card" href="tools/technical-webslides.html">
-            <div class="tag">Slides</div>
-            <h3>Technical webslides</h3>
-            <p>Slide-style walkthrough of architecture and authentication flows.</p>
-          </a>
+      <section id="partners" class="section-block">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-label">Partner engine</div>
+            <h2>Build the MSP motion with sharper responses and cleaner enablement.</h2>
+            <p>The partner layer now includes strategy, a program outline, playbooks, and concise battlecards for the main competitive conversations.</p>
+          </div>
+          <div class="stack-grid">
+            <a class="tile span-4" href="md-viewer.html?file=content/partner/program-outline.md"><div class="icon-chip">PP</div><div class="card-meta">Program</div><h3>Partner program outline</h3><p>The simplest credible starting model for tiers, value, and enablement.</p></a>
+            <a class="tile span-4" href="md-viewer.html?file=content/strategy/msp-channel.md"><div class="icon-chip">MS</div><div class="card-meta">Strategy</div><h3>MSP channel strategy</h3><p>Why the channel fits, who to target, and what the program needs next.</p></a>
+            <a class="tile span-4" href="md-viewer.html?file=content/playbooks/msp-outreach-sequences.md"><div class="icon-chip">OS</div><div class="card-meta">Playbook</div><h3>Outreach sequences</h3><p>Cold and warm email/LinkedIn sequences for manufacturing and retail-focused MSPs.</p></a>
+            <a class="tile span-3" href="md-viewer.html?file=content/partner/battlecards/microsoft-entra-qr-and-pin.md"><div class="icon-chip">EN</div><div class="card-meta">Battlecard</div><h3>Entra QR + PIN</h3><p>The most important frontline competitive response.</p></a>
+            <a class="tile span-3" href="md-viewer.html?file=content/partner/battlecards/cisco-duo.md"><div class="icon-chip">DU</div><div class="card-meta">Battlecard</div><h3>Duo</h3><p>How to frame device assumptions and workflow fit.</p></a>
+            <a class="tile span-3" href="md-viewer.html?file=content/partner/battlecards/oloid.md"><div class="icon-chip">OL</div><div class="card-meta">Battlecard</div><h3>OLOID</h3><p>How to position BlokSec against a frontline-focused enterprise competitor.</p></a>
+            <a class="tile span-3" href="md-viewer.html?file=content/partner/battlecards/secret-double-octopus.md"><div class="icon-chip">SD</div><div class="card-meta">Battlecard</div><h3>Secret Double Octopus</h3><p>How to reframe the conversation when passwordless credibility is already present.</p></a>
+          </div>
+        </div>
+      </section>
+
+      <section id="tools" class="section-block">
+        <div class="container">
+          <div class="cta-panel">
+            <div class="section-header">
+              <div class="section-label" style="background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.12);">Tools and collateral</div>
+              <h2>Keep the strongest reusable assets in circulation.</h2>
+              <p>These are the working tools and HTML collateral that can support live selling, partner enablement, and future hub upgrades.</p>
+            </div>
+            <div class="card-grid">
+              <a class="tile dark" href="tools/roi-calculator.html"><div class="icon-chip">RC</div><div class="card-meta">Tool</div><h3>ROI calculator</h3><p>Interactive calculator for reset-cost, productivity, and payback storytelling.</p></a>
+              <a class="tile dark" href="tools/msp-partner-one-pager.html"><div class="icon-chip">OP</div><div class="card-meta">Collateral</div><h3>MSP one-pager</h3><p>Quick partner-facing overview with economics and positioning.</p></a>
+              <a class="tile dark" href="tools/technical-overview.html"><div class="icon-chip">TO</div><div class="card-meta">Technical</div><h3>Technical overview</h3><p>Architecture and technical explanation for technical buyers and partners.</p></a>
+              <a class="tile dark" href="tools/technical-webslides.html"><div class="icon-chip">WS</div><div class="card-meta">Slides</div><h3>Technical webslides</h3><p>Slide-style walkthrough of architecture and authentication flows.</p></a>
+            </div>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer class="footer">BlokSec GTM resource hub — scaffolded March 2026 from refreshed research and legacy GTM assets.</footer>
+    <footer class="footer">BlokSec GTM hub — premium redesign applied using the frontline-first brand system and March 2026 design guidance.</footer>
   </body>
 </html>

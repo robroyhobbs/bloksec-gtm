@@ -65,7 +65,7 @@ Hygiene constraints, controlled environments, and worker accountability.
 Shared stations, urgent workflows, lean IT teams, and trust-sensitive access.
 
 ## Section: Works with your stack
-BlokSec is designed to work with the systems teams already use, including Microsoft Entra ID, Google Workspace, Okta, Ping, and other identity environments.
+BlokSec is designed to fit alongside the systems teams already use, including Microsoft environments, Google Workspace, Okta, and other standards-based identity environments.
 
 ## Section: Proof and maturity
 - active product development and visible `v4.0` platform improvements

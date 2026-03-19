@@ -10,6 +10,8 @@ It combines three things in one place:
 ## Repo structure
 
 - `PRODUCT.md` — stable product and GTM brief
+- `PRODUCT_CONTEXT.md` — product-truth and claims-validation reference for marketing and GTM work
+- `CLAIMS_EVIDENCE_REGISTER.csv` — claim-by-claim evidence tracker for marketing review
 - `docs/` — GitHub Pages source for the resource hub
 - `docs/content/context/` — company, product, market, compliance, pricing, and competitor context
 - `docs/content/strategy/` — GTM plan, target markets, content engine, and MSP strategy
