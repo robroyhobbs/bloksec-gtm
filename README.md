@@ -24,6 +24,13 @@ It combines three things in one place:
 
 The resource hub is intended to publish through GitHub Pages using the `/docs` folder as the site source.
 
+## Published URLs
+
+- GitHub repo: `https://github.com/robroyhobbs/bloksec-gtm`
+- GitHub Pages hub: `https://robroyhobbs.github.io/bloksec-gtm/`
+- Homepage prototype: `https://robroyhobbs.github.io/bloksec-gtm/site/homepage.html`
+- Demo prototype: `https://robroyhobbs.github.io/bloksec-gtm/site/demo.html`
+
 ## Immediate priorities
 
 1. Tighten positioning around SMB and mid-market frontline/shared-device environments.
