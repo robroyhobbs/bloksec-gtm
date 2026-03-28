@@ -744,7 +744,7 @@ img {
   border: 1px solid var(--line);
   background: var(--viewer-panel-bg);
   box-shadow: var(--shadow-md);
-  padding: 30px;
+  padding: 34px;
 }
 
 .viewer-card {
@@ -802,6 +802,27 @@ img {
   max-width: var(--content-width);
 }
 
+.md-sections {
+  display: grid;
+  gap: 22px;
+}
+
+.md-intro-block,
+.md-section {
+  border-radius: calc(var(--radius-lg) - 2px);
+}
+
+.md-intro-block {
+  margin-bottom: 22px;
+}
+
+.md-section {
+  padding: 22px 24px 18px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--surface-strong), var(--surface-muted));
+  box-shadow: var(--shadow-sm);
+}
+
 .md-content > :first-child {
   margin-top: 0;
 }
@@ -825,14 +846,16 @@ img {
 }
 
 .md-content h2 {
-  margin: 42px 0 14px;
+  margin: 0 0 16px;
   font-size: clamp(1.45rem, 2.4vw, 2rem);
   line-height: 1.08;
   letter-spacing: -0.03em;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
 }
 
 .md-content h3 {
-  margin: 28px 0 10px;
+  margin: 26px 0 10px;
   font-size: 1.18rem;
 }
 
@@ -899,15 +922,14 @@ img {
 .md-content blockquote {
   margin-left: 0;
   padding: 14px 18px;
-  border-left: 3px solid var(--brand-500);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--brand-500);
   background: var(--blockquote-bg);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  border-radius: var(--radius-sm);
 }
 
 .md-content hr {
-  border: none;
-  border-top: 1px solid rgba(83, 46, 145, 0.12);
-  margin: 32px 0;
+  display: none;
 }
 
 .md-content a {
@@ -928,6 +950,8 @@ img {
   overflow-x: auto;
   border-collapse: collapse;
   border-spacing: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
 }
 
 .md-content thead th {
@@ -957,6 +981,10 @@ img {
   .viewer-sidebar {
     position: static;
     order: -1;
+  }
+
+  .md-section {
+    padding: 20px 18px 16px;
   }
 
   .stack-grid {
@@ -1011,6 +1039,10 @@ img {
   .tile.span-4,
   .tile.span-3 {
     grid-column: span 1;
+  }
+
+  .md-section {
+    padding: 18px 16px 14px;
   }
 
   .container {

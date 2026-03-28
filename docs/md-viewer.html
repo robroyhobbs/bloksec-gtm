@@ -110,6 +110,53 @@
         }
       };
 
+      const organizeContent = () => {
+        const nodes = [...content.childNodes];
+        const hasSections = nodes.some((node) => node.nodeType === Node.ELEMENT_NODE && node.tagName === "H2");
+        if (!hasSections) return;
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "md-sections";
+
+        const intro = document.createElement("section");
+        intro.className = "md-intro-block";
+
+        let currentSection = null;
+
+        for (const node of nodes) {
+          if (
+            node.nodeType === Node.TEXT_NODE &&
+            !node.textContent.trim()
+          ) {
+            continue;
+          }
+
+          if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "HR") {
+            continue;
+          }
+
+          if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "H2") {
+            currentSection = document.createElement("article");
+            currentSection.className = "md-section";
+            wrapper.appendChild(currentSection);
+          }
+
+          if (currentSection) {
+            currentSection.appendChild(node);
+          } else {
+            intro.appendChild(node);
+          }
+        }
+
+        content.innerHTML = "";
+
+        if (intro.childNodes.length) {
+          content.appendChild(intro);
+        }
+
+        content.appendChild(wrapper);
+      };
+
       if (!file) {
         content.innerHTML = '<div class="error">No file specified. Return to the <a href="index.html">resource hub</a>.</div>';
         filePath.textContent = "No file selected";
@@ -123,6 +170,7 @@
           })
           .then((text) => {
             content.innerHTML = marked.parse(text);
+            organizeContent();
             setDocumentTitle();
             buildToc();
           })
