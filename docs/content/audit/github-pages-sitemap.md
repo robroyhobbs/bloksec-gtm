@@ -54,6 +54,7 @@ Priority pages:
 - research revisit packet
 - strategy framework
 - frontline passwordless market research
+- AI tooling x GTM funnel matrix
 - market, compliance, product, and competitor context
 
 Primary outcome:

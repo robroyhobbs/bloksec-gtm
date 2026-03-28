@@ -19,15 +19,13 @@
 - HD (Hierarchical Deterministic) wallet generates unique key pairs per application
 - Per-app key isolation prevents cross-application compromise
 - Private keys never leave the device
-- ECDSA asymmetric cryptography — no shared secrets
+- Asymmetric cryptography reduces reusable shared-secret exposure
 
-**Integrations:**
-- Microsoft Entra ID (Azure AD)
-- Google Workspace
-- Okta
-- Ping Identity
-- Salesforce
-- Any OIDC/SAML 2.0/WS-Federation application
+**Integration fit:**
+- Standards-based support across OIDC, SAML 2.0, and WS-Federation applications
+- Microsoft environments are part of the stack-fit story, with exact setup depending on the federation path and customer environment
+- Google Workspace, Okta, and similar identity environments should be described according to the documented deployment pattern in use
+- Named-provider claims should follow current proof rather than generic compatibility assumptions
 
 ---
 
@@ -49,24 +47,15 @@
 
 **Technical details:**
 - **Split-key cryptography:** The QR badge contains half of an encryption key. The server holds the other half. Neither half works alone.
-- Badge can be printed on any standard badge printer in ~30 seconds
-- Lost/stolen badge is deactivated remotely and instantly
-- New badge printed immediately — no hardware procurement
-- Works with gloves, in clean rooms, with PPE
+- Badges can be printed on standard badge printers or delivered digitally where supported
+- Deactivation and re-issue are handled through administrative workflows
+- Works well with gloves, in clean rooms, and in PPE-constrained environments
 
 **Why this matters:**
-- Traditional MFA requires smartphones — 80% of frontline workers don't have company-issued devices
-- Hardware tokens (YubiKeys) cost $25-90 each, get lost, require logistics
-- RFID/NFC solutions (OLOID) require infrastructure investment
-- BlokBadge needs only a printer
-
-**Cost comparison:**
-| Method | Per-Worker Cost | Infrastructure |
-|--------|----------------|---------------|
-| BlokBadge | $3-5/mo | Standard badge printer |
-| YubiKey | $25-90 one-time + replacement | Key management system |
-| OLOID | Not disclosed | RFID/NFC readers at every terminal |
-| Smartphone MFA | $3-9/mo | Requires personal device |
+- Phone-based MFA breaks down when workers do not have reliable smartphone access
+- Hardware tokens create replacement and logistics overhead
+- Reader-based approaches can add infrastructure cost and rollout friction
+- BlokBadge fits QR-based workflows that work with existing cameras and badge operations
 
 ---
 
@@ -76,9 +65,9 @@
 
 **What it does:**
 - Stores and manages credentials and sensitive data
-- Zero-password sharing between team members
-- Encrypted vault with access controls
-- Eliminates the need for shared password spreadsheets or sticky notes
+- Gives users a launchpad for credentials and application access
+- Supports controlled sharing workflows for users and groups
+- Replaces ad hoc password spreadsheets and sticky-note workarounds with encrypted, permissioned access
 
 ---
 
@@ -87,9 +76,8 @@
 **Target:** IT administrators, MSP technicians
 
 **What it does:**
-- Centralized management of all BlokSec products
-- User provisioning and deprovisioning
-- Application configuration and integration management
-- Audit trail viewing and compliance reporting
-- Badge printing and management (BlokBadge)
-- Multi-tenant support for MSPs managing multiple clients
+- Centralized management of BlokSec authentication, vault, and application configuration
+- User provisioning, suspension, and lifecycle management
+- Reporting, analytics, export, and audit-trail review
+- Badge provisioning, bulk actions, and device management
+- Multi-tenant and branding foundations that can support partner-led deployments with the right operating model

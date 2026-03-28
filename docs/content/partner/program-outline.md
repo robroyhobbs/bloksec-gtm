@@ -1,7 +1,7 @@
 # Partner Program Outline
 
 ## Purpose
-Give MSPs and channel partners a simple way to understand where BlokSec fits, how the economics work, and what support they should expect.
+Give MSPs and channel partners a simple way to understand where BlokSec fits, how the channel model is currently shaping up, and what support they should reasonably expect at this stage.
 
 ## Who this is for
 - MSPs serving SMB and mid-market clients
@@ -38,3 +38,5 @@ Give MSPs and channel partners a simple way to understand where BlokSec fits, ho
 
 ## Immediate recommendation
 Keep the initial program simple and operationally realistic. The near-term goal is to remove friction for first partners, not to build a complex channel bureaucracy.
+
+Treat this outline as a working operating model, not a public promise that every tier, asset, and support motion is already fully productized.

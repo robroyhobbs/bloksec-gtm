@@ -2,7 +2,7 @@
 
 ## System Overview
 
-BlokSec operates as a full **Identity Provider (IdP)** that sits between users and enterprise applications, handling authentication without passwords.
+BlokSec operates as a passwordless **Identity Provider (IdP)** and access platform that sits between users and enterprise applications, handling authentication flows while also supporting vault, admin, and audit workflows.
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -46,7 +46,7 @@ BlokSec operates as a full **Identity Provider (IdP)** that sits between users a
 - **Key Management:** HD (Hierarchical Deterministic) wallet
 - **Key Isolation:** Unique key pair generated per application
 - **Private Key Storage:** Device-only, never transmitted
-- **Zero shared secrets:** No passwords, tokens, or secrets stored server-side
+- **Reduced reusable secrets:** No shared passwords and no exportable private keys stored server-side
 
 ### BlokBadge (QR Badge)
 - **Split-Key Architecture:**
@@ -59,7 +59,7 @@ BlokSec operates as a full **Identity Provider (IdP)** that sits between users a
 
 ### Key Security Properties
 - **No server-side passwords** — Nothing to breach in a database compromise
-- **No shared secrets** — Asymmetric crypto eliminates MITM and replay attacks
+- **No shared passwords or reusable cryptographic secrets** — Asymmetric crypto reduces replay and credential-reuse risk
 - **Per-app isolation** — Compromise of one app doesn't affect others
 - **Immutable audit** — Append-only database for tamper-proof authentication logs
 
@@ -73,27 +73,22 @@ BlokSec operates as a full **Identity Provider (IdP)** that sits between users a
 
 ## Integration Points
 
-### Identity Providers (Federation)
-- Microsoft Entra ID (Azure AD) — including B2C
-- Google Workspace
-- Okta
-- Ping Identity
-
-### Privileged Access Management
-- Delinea
-- CyberArk
-- BeyondTrust
+### Identity-stack fit
+- Standards-based application support across OIDC, SAML 2.0, and WS-Federation
+- Microsoft environments are part of the stack-fit story, with exact deployment details depending on the federation path and customer environment
+- Google Workspace, Okta, and similar identity environments should be described using the documented deployment pattern in use
+- Named-provider positioning should follow current proof rather than generic compatibility assumptions
 
 ### Business Applications
-- Salesforce
-- Any OIDC/SAML/WS-Fed compatible application
+- Salesforce and other standards-compatible business applications
+- Any OIDC, SAML, or WS-Federation compatible application
 
 ## Deployment Model
 
-- Cloud-hosted SaaS (primary)
-- Standard protocol integration — no custom agents or plugins required
-- Typical deployment: < 1 day for most environments
-- MSP multi-tenant support built-in
+- Cloud-hosted SaaS is the primary operating model
+- Standard protocol integration reduces the need for custom agents or plugins for core SSO use cases
+- Deployment speed depends on the customer environment, protocol mix, directory setup, and desired branding or governance flows
+- Multi-tenant administration and branding foundations exist, but partner operating workflows and packaging still need formalization
 
 ## Security Comparison vs. Traditional MFA
 
@@ -105,4 +100,4 @@ BlokSec operates as a full **Identity Provider (IdP)** that sits between users a
 | Works with gloves | N/A | No | Depends | No | Yes |
 | Per-app key isolation | No | No | No | Yes | N/A |
 | Immutable audit trail | No | No | No | Yes | Yes |
-| Replacement cost | N/A | N/A | $25-90/key | $0 | $0 (reprint) |
+| Replacement cost | N/A | N/A | Hardware replacement required | App/device re-enrollment | Badge reprint or re-issue workflow |
