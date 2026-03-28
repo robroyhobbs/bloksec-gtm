@@ -39,6 +39,10 @@ That maps directly to long-term care, post-acute care, and smaller healthcare en
 
 > “Healthcare now needs MFA that works in the real world, not just on paper. Your staff share stations, move fast, wear gloves, and do not all carry company phones. BlokSec gives each worker a secure badge-based login that works on shared devices, strengthens accountability, and supports a cleaner audit trail without rolling out hardware tokens everywhere.”
 
+### Short version for outreach
+
+> “PointClickCare and HIPAA are forcing MFA into environments where phone-based MFA does not fit. BlokSec gives long-term care teams a badge-based path that works on shared stations, improves accountability, and avoids hardware-heavy rollouts.”
+
 ---
 
 ## Why now
@@ -170,6 +174,59 @@ The BlokSec angle is simpler:
 
 ---
 
+## Why a healthcare company would choose BlokSec
+
+These reasons need to stay tied to what we can actually support today.
+
+### 1. The workflow fit is better
+
+Healthcare buyers do not just need MFA. They need MFA that works when:
+
+- staff rotate across shared stations
+- gloves and PPE make typing painful
+- shift-based work makes phone prompts disruptive
+
+That is where BlokBadge is strongest.
+
+### 2. The rollout can be lighter
+
+BlokSec is easier to picture in smaller care environments because the story is lighter-weight:
+
+- QR-based badge flow
+- no assumption that every worker has a managed phone
+- no immediate requirement for hardware-token logistics
+- standards-based federation instead of proprietary lock-in
+
+### 3. The accountability story is stronger
+
+Healthcare environments often still rely on shared credentials or weak exceptions.
+
+BlokSec gives a cleaner story around:
+
+- unique worker-level authentication
+- immutable audit records
+- badge lifecycle control
+- delegated recovery for operational teams
+
+### 4. The economics are easier to explain
+
+The near-term business case is not abstract AI-security language. It is:
+
+- fewer password resets
+- fewer workaround exceptions
+- lower credential replacement overhead than hardware-heavy models
+- faster onboarding and recovery for rotating staff
+
+### 5. The wedge is clearer than generic IAM
+
+Most competitors can talk about MFA. Fewer can talk credibly about **shared clinical workflows**.
+
+That is why the healthcare pitch should stay narrow and practical:
+
+**shared stations + no-phone workflows + auditability + lighter deployment**
+
+---
+
 ## What we already have
 
 Repo-verified strengths that matter for healthcare:
@@ -275,6 +332,59 @@ If we want this to become a real vertical, we need a tighter content package aro
 - **BAA / legal readiness**
 - **implementation checklist**
 - **proof register** showing which claims are validated, directional, or still pending
+
+---
+
+## Ranked execution plan
+
+This is the practical order of operations.
+
+### Tier 1 — Must have before outreach
+
+These are the minimum items needed before we push the healthcare story hard:
+
+1. **PointClickCare federation validation**
+2. **clear healthcare talk track**
+3. **simple healthcare one-pager**
+4. **proof register for claims**
+
+Without these, we are still selling an idea more than a wedge.
+
+### Tier 2 — Must have before pilot
+
+These are required to run a real healthcare evaluation cleanly:
+
+1. **healthcare demo environment**
+2. **workflow diagram for shared-station login**
+3. **security / HIPAA mapping**
+4. **BAA / legal readiness**
+5. **pilot offer with success criteria**
+
+Without these, the first pilot will feel improvised.
+
+### Tier 3 — Must have before scale
+
+These are needed once the first pilot proves the motion:
+
+1. **pilot case study**
+2. **Imprivata battlecard**
+3. **persona briefs**
+4. **objection handling**
+5. **healthcare landing page**
+6. **MSP outreach sequence for LTC-focused providers**
+
+Without these, the motion may work once but remain hard to repeat.
+
+### Tier 4 — Nice to have after proof
+
+These help turn a good vertical into a real program:
+
+1. **SEO page around healthcare MFA / HIPAA**
+2. **EHR integration matrix**
+3. **secondary-clinic expansion content**
+4. **conference and partner package**
+
+These matter, but they should follow proof — not replace it.
 
 ---
 
