@@ -208,6 +208,76 @@ Supporting needs:
 
 ---
 
+## What we need to validate claims
+
+We should treat healthcare as a proof-led motion. Before scaling the story, we need validation in four areas.
+
+### 1. Technical validation
+
+- confirm **PointClickCare federation** works cleanly in a realistic environment
+- document the **exact login flow** for shared stations, badge scan, and fallback paths
+- validate **session behavior** so the workflow does not create constant re-prompts for staff
+- verify **camera/scanner assumptions** in real workstation setups
+
+### 2. Buyer and workflow validation
+
+- test the story with **clinical IT**, **nursing leadership**, and **compliance** buyers
+- validate whether the strongest wedge is really **PointClickCare urgency**, **shared stations**, or **auditability**
+- confirm that the **Imprivata comparison** resonates in LTC, not just in hospital environments
+- learn where the real objection shows up first: workflow change, trust, security review, or budget
+
+### 3. Operational validation
+
+- measure **login speed**
+- measure **new-user provisioning time**
+- measure **badge re-issue / recovery time**
+- measure whether delegated management actually reduces support dependency
+
+These metrics matter more than abstract ROI estimates.
+
+### 4. Trust and compliance validation
+
+- confirm what buyers expect in a **security review**
+- confirm whether a **BAA** is mandatory before pilot or only before production
+- map BlokSec to the healthcare buyer's real checklist: MFA, audit trail, accountability, recovery, and admin controls
+- identify which claims need legal or compliance sign-off before external use
+
+---
+
+## Support content required
+
+If we want this to become a real vertical, we need a tighter content package around it.
+
+### Required proof assets
+
+- **PointClickCare validation note** — what was tested, what worked, and what caveats remain
+- **pilot case study** — even anonymized at first
+- **workflow diagram** — badge-to-shared-station flow for LTC staff
+- **security / compliance mapping** — how BlokSec supports MFA, auditability, and accountability requirements
+
+### Required buyer-facing content
+
+- **healthcare one-pager** for first meetings
+- **healthcare landing page** or focused hub page
+- **persona briefs** for clinical IT, nursing leadership, compliance, and operations
+- **FAQ** covering phones, gloves, shared stations, audit trails, and rollout friction
+
+### Required sales enablement
+
+- **talk track** for PointClickCare-triggered outreach
+- **competitive battlecard** for Imprivata
+- **objection handling** for “we already have Duo/Entra” and “we cannot disrupt clinical workflow”
+- **pilot offer outline** with scope, success criteria, and expected buyer effort
+
+### Required trust content
+
+- **security overview**
+- **BAA / legal readiness**
+- **implementation checklist**
+- **proof register** showing which claims are validated, directional, or still pending
+
+---
+
 ## Go-to-market sequence
 
 ### Phase 1: Validate
