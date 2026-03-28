@@ -1,31 +1,69 @@
 # Care Settings
 
-## Why this vertical fits
-Smaller healthcare and care environments combine shared stations, urgent workflows, rotating shifts, and high trust requirements.
+> **Audience:** Internal GTM use
+> **Purpose:** Short industry brief for care environments that rely on shared devices and fast worker switching
+
+---
+
+## Why this segment fits
+
+Care settings combine four things that matter to BlokSec:
+
+- shared stations
+- urgent workflows
+- rotating shifts
+- accountability pressure
+
+That makes them a strong fit for badge-based passwordless access.
+
+---
 
 ## Core pain
-- caregivers and staff move quickly between shared stations
-- password sharing becomes tempting when speed matters
-- lockouts and resets create care disruption
-- many organizations lack the IAM maturity of large hospital systems
 
-## Why passwords fail here
-Passwords slow urgent work, break accountability, and create exactly the kind of workaround behavior that regulated environments want to avoid.
+- staff move quickly between shared stations
+- password sharing becomes the shortcut when speed matters
+- lockouts and resets interrupt care
+- many environments have lean IT and weak IAM maturity
+
+---
 
 ## Why BlokSec matters here
+
 - faster access on shared devices
 - better accountability than shared credentials
 - clearer audit trails
 - less reset burden for lean IT teams
 
-## GTM angle
-Lead with speed, accountability, and lean-team practicality:
-- fast secure access for staff on shared devices
-- easier worker switching during shift changes
-- simpler recovery and re-provisioning when credentials are lost
+---
 
-## Best supporting assets
-- frontline worker research
-- compliance context with HIPAA watchlist notes
-- ROI calculator
-- case-study and audit language once healthcare proof grows
+## Best-fit environments
+
+- assisted living
+- skilled nursing
+- memory care
+- rehab
+- smaller post-acute care environments
+
+These are usually a better starting point than large hospital systems because the need is real but the deployment model is simpler.
+
+---
+
+## How to talk about it
+
+Lead with workflow, not regulation:
+
+- fast secure access for staff on shared devices
+- fewer workarounds during shift changes
+- simpler re-issue and recovery when credentials are lost
+
+Then bring in the compliance angle as supporting pressure.
+
+---
+
+## Use this page with
+
+- the full `Healthcare MFA vertical` strategy page
+- the compliance reference
+- frontline market research
+
+This page should stay brief. The deeper narrative belongs in the healthcare vertical strategy.

@@ -1,77 +1,63 @@
 # Competitive Landscape
 
-## Tier 1: Enterprise Passwordless Platforms
+This page is meant to be fast to scan.
 
-### HYPR
-- **Focus:** Identity Assurance platform
-- **Pricing:** $4/user/mo (workforce)
-- **Strength:** 324% ROI (Forrester study), 18.7% mindshare in passwordless
-- **Weakness:** Enterprise-heavy, complex for SMBs, expensive deployment
-- **BlokSec advantage:** "Enterprise-complex and enterprise-priced. BlokSec is built for MSPs and mid-market."
+The goal is not to catalogue every identity vendor. The goal is to remember where BlokSec has the clearest angle.
 
-### Beyond Identity
-- **Focus:** Device-bound zero trust authentication
-- **Pricing:** ~$31K/yr average contract
-- **Strength:** Cryptographic device trust, AI-powered security analytics
-- **Weakness:** High price point, complex deployment, requires managed devices
-- **BlokSec advantage:** "Requires managed devices. BlokBadge works for workers who don't have any device."
+---
 
-### Yubico
-- **Focus:** Hardware FIDO2 security keys
-- **Pricing:** $25-90 per key + subscription
-- **Strength:** Physical security, FIPS validated, government-grade
-- **Weakness:** Hardware logistics at scale, keys get lost, expensive to replace
-- **BlokSec advantage:** "Hardware keys cost $25-90 each, get lost, need logistics. QR badges are printed for pennies."
+## The short version
 
-## Tier 2: Identity Platform Giants
+BlokSec is strongest when the competitor assumes one of these things:
 
-### Okta
-- **Pricing:** $6-17/user/mo
-- **Strength:** Thousands of integrations, market leader in IAM
-- **Weakness:** Passwordless isn't core focus, no frontline solution
-- **BlokSec advantage:** "Okta doesn't solve for workers without smartphones."
+1. every worker has a smartphone
+2. every user has a managed device
+3. the customer will accept hardware-key logistics
+4. the rollout can tolerate heavier infrastructure
 
-### Microsoft Entra ID
-- **Pricing:** Bundled with M365
-- **Strength:** Native Microsoft integration, huge install base
-- **Weakness:** Lock-in, no dedicated frontline worker auth
-- **BlokSec advantage:** "Entra doesn't cover frontline workers without phones. BlokSec complements Entra."
+That is why the frontline and shared-device wedge matters.
 
-### Cisco Duo
-- **Pricing:** $3-9/user/mo
-- **Strength:** Strong MSP channel, pay-as-you-go model
-- **Weakness:** Not "true" passwordless, still requires phone
-- **BlokSec advantage:** "Duo requires a smartphone. 80% of frontline workers don't have company devices."
+---
 
-## Tier 3: Closest Competitors (Frontline Focus)
+## Fast battlecard summary
 
-### OLOID
-- **Focus:** Frontline worker authentication (face, RFID, NFC, QR)
-- **Customers:** Tyson Foods, PepsiCo, Dell, GE
-- **Backed by:** Dell Ventures, Okta Ventures, Honeywell Ventures
-- **Strength:** Enterprise logos, multiple auth modalities
-- **Weakness:** Enterprise-only, no MSP channel, requires RFID/NFC infrastructure
-- **BlokSec advantage:** "OLOID needs RFID/NFC infrastructure at every terminal. BlokBadge needs a printer."
+| Against | Lead with | Why it works |
+|---------|-----------|--------------|
+| **Duo / Okta** | They still assume phone-heavy workflows. | Many frontline workers do not have company devices. |
+| **Entra alone** | It does not fully solve the frontline shared-device gap. | BlokSec complements Entra instead of trying to replace it. |
+| **Yubico / hardware keys** | Hardware adds cost and replacement logistics. | BlokBadge prints instead of ships. |
+| **HYPR / Beyond Identity** | Strong for managed-device environments, heavier for mid-market frontline use. | BlokBadge works when the worker has no managed device. |
+| **OLOID** | Their model assumes more infrastructure at the edge. | BlokBadge works with a lighter QR-based approach. |
+| **IDEE** | Similar MSP logic, weaker frontline wedge. | BlokSec combines MSP fit with frontline device-light access. |
 
-### IDEE (AuthN)
-- **Focus:** Passwordless MFA designed specifically for MSPs
-- **Channel:** TD Synnex distribution, white-label ready
-- **Strength:** MSP-first design, European market presence
-- **Weakness:** Smaller company, primarily EU-focused
-- **BlokSec advantage:** "We share the MSP-first philosophy. BlokBadge gives us the frontline edge IDEE doesn't have."
+---
 
-### Secret Double Octopus
-- **Focus:** Enterprise passwordless + ZeroPassword MSP program
-- **Strength:** Formal MSP program exists
-- **Weakness:** Lower brand recognition, complex product name
-- **BlokSec advantage:** "Similar approach but we're purpose-built for frontline workers."
+## Where we win most clearly
 
-## Battlecard Summary
+### Phone-dependent MFA
 
-| Against | Lead With | Proof Point |
-|---------|----------|-------------|
-| Duo/Okta | "They need smartphones" | 80% of frontline workers lack company devices |
-| HYPR | "Enterprise-complex, enterprise-priced" | MSP-friendly pricing at $3-5/user |
-| Yubico | "Keys cost $25-90, get lost" | Badge prints in 30 seconds, $0 replacement |
-| OLOID | "Needs RFID/NFC infrastructure" | BlokBadge needs only a standard printer |
-| Entra | "Doesn't cover frontline" | BlokSec complements Entra, not competes |
+This is the easiest opening.
+
+If the buyer has shift workers, seasonal labor, shared devices, or workers without managed phones, BlokSec has a sharper story than phone-first MFA.
+
+### Hardware-heavy models
+
+This is the next-best opening.
+
+If the buyer is worried about key distribution, replacement, and support, BlokSec can reframe the conversation around printed credentials and simpler recovery.
+
+### Platform gaps
+
+This is the Entra conversation.
+
+The point is not that Entra is irrelevant. The point is that it still leaves a frontline workflow problem unsolved in many environments.
+
+---
+
+## Use this page with
+
+- `positioning.md` for the core story
+- vertical pages for market-specific angles
+- battlecards for the detailed competitive talk tracks
+
+If a sales conversation gets deep, move to the specific battlecard. Do not overload this page.

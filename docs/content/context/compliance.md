@@ -1,87 +1,58 @@
-# Compliance & Regulatory Framework
+# Compliance Drivers
 
-## PCI DSS 4.0 — Payment Card Industry
+This page is a working reference, not a narrative page.
 
-**Status:** Active enforcement (March 2025 deadline passed)
-**Affects:** Every company handling payment card data
-**Key requirement:** Universal MFA for ALL access to cardholder data environments (not just remote)
-**Impact on BlokSec:** Retail clients with shared POS terminals must now have individual MFA per worker
-**Penalties:** $5K-100K/month per violation, potential loss of card processing ability
+Use it to answer one question:
 
-## FDA 21 CFR Part 11 — Electronic Records & Signatures
+**Which regulatory frameworks create the clearest reason to buy BlokSec?**
 
-**Status:** Active
-**Affects:** Pharmaceutical, biotech, medical device manufacturing
-**Key requirements:**
-- Unique electronic signatures per individual
-- Two-factor authentication for electronic signatures
-- Audit trail for all signature events
-- System access controls preventing unauthorized use
-**Impact on BlokSec:** Manufacturing clients in pharma/biotech need per-worker auth with audit trails
-**Penalties:** Warning letters, consent decrees, product seizure, criminal prosecution
+---
 
-## SOC 2 — Service Organization Control
+## Priority regulatory drivers
 
-**Status:** Active (ongoing audits)
-**Affects:** Any company undergoing SOC 2 Type I or Type II audit
-**Key requirements:**
-- Individual user authentication (no shared accounts)
-- Unique user IDs
-- Multi-factor authentication
-- Access logging and monitoring
-**Impact on BlokSec:** SOC 2 auditors flag shared workstation credentials — BlokBadge solves this
+| Regulation | Status | Best-fit vertical | Why it matters |
+|-----------|--------|------------------|----------------|
+| **PCI DSS 4.0** | Active | Retail | MFA now applies broadly in cardholder environments, including shared terminals. |
+| **FDA 21 CFR Part 11** | Active | Manufacturing | Requires individual electronic signatures, two-factor controls, and audit trails. |
+| **SOC 2** | Active | Broad SMB + mid-market | Shared accounts and weak access controls become audit findings quickly. |
+| **HIPAA Security Rule update** | Emerging | Healthcare | MFA pressure is rising fast, especially where shared clinical workflows still rely on passwords. |
+| **NERC CIP** | Active | Energy / utilities | Individual authentication and auditability matter in remote and high-risk environments. |
+| **CMMC 2.0** | Rolling out | Defense manufacturing | MFA is part of the compliance baseline for controlled environments. |
 
-## NERC CIP — Critical Infrastructure Protection
+---
 
-**Status:** Active
-**Affects:** Energy and utility operators
-**Key requirements:**
-- MFA + PKI for Bulk Electric System (BES) access
-- Individual identification and authentication
-- Audit logging for all access events
-**Impact on BlokSec:** Energy sector workers at remote sites need MFA without smartphone dependency
+## What BlokSec brings to the compliance conversation
 
-## NIST SP 800-63B — Digital Identity Guidelines
+Across the main frameworks, the recurring themes are the same:
 
-**Status:** Active
-**Affects:** Federal agencies, government contractors, standard for all US security assessments
-**Key requirements at AAL2/AAL3:**
-- Cryptographic authenticators required
-- Phishing-resistant MFA at AAL3
-- No knowledge-based authentication alone
-**Impact on BlokSec:** Sets the technical standard that BlokSec's cryptographic approach meets
+- individual authentication
+- MFA
+- auditability
+- fewer shared-credential workarounds
 
-## CISA / OMB M-22-09 — Federal Zero Trust
+That is why the frontline shared-device wedge matters so much. The compliance problem is not just “do you have MFA?” It is:
 
-**Status:** Active
-**Affects:** All federal agencies + contractors
-**Key requirement:** Phishing-resistant MFA required for all federal systems
-**Impact on BlokSec:** Government contractor clients need phishing-resistant MFA for compliance
+**Do you have MFA that actually works in the environment where people are still sharing credentials?**
 
-## HIPAA Security Rule Update (Upcoming)
+---
 
-**Status:** Expected late 2026-2027
-**Affects:** Every healthcare provider in the US (~18M workers)
-**Key change:** MFA now MANDATORY (first update in 20 years — previously "addressable")
-**Impact on BlokSec:** Massive opportunity when we're ready to enter healthcare
-**Note:** Healthcare deferred in current strategy — will revisit after manufacturing/retail established
+## Coverage snapshot
 
-## CMMC 2.0 — Cybersecurity Maturity Model Certification
+| Regulation | BlokKey | BlokBadge | Audit trail | Primary note |
+|-----------|---------|-----------|-------------|-------------|
+| PCI DSS 4.0 | Yes | Yes | Yes | Strong retail driver |
+| FDA 21 CFR Part 11 | Yes | Yes | Yes | Strong manufacturing driver |
+| SOC 2 | Yes | Yes | Yes | Broad enterprise relevance |
+| HIPAA | Yes | Yes | Yes | Strong healthcare potential, still early in GTM |
+| NERC CIP | Yes | Yes | Yes | Good fit for remote and shared-device use cases |
+| CMMC 2.0 | Yes | Yes | Yes | Useful in defense manufacturing contexts |
 
-**Status:** Phased rollout
-**Affects:** Defense industrial base, defense contractors
-**Key requirements:** MFA for all users accessing controlled unclassified information (CUI)
-**Impact on BlokSec:** Defense manufacturing clients need compliant MFA
+---
 
-## Compliance Coverage Matrix
+## Current GTM priority order
 
-| Regulation | BlokKey | BlokBadge | Audit Trail | Notes |
-|-----------|---------|-----------|-------------|-------|
-| PCI DSS 4.0 | Yes | Yes | Yes | Primary retail driver |
-| FDA 21 CFR Part 11 | Yes | Yes | Yes | Primary manufacturing driver |
-| SOC 2 | Yes | Yes | Yes | Universal enterprise driver |
-| NERC CIP | Yes | Yes | Yes | Energy sector |
-| NIST 800-63B | AAL2+ | AAL2 | Yes | Federal standard |
-| CISA Zero Trust | Yes | Yes | Yes | Government |
-| HIPAA | Yes | Yes | Yes | Future — healthcare |
-| CMMC 2.0 | Yes | Yes | Yes | Defense manufacturing |
+1. **Retail / PCI**
+2. **Manufacturing / FDA**
+3. **Healthcare / HIPAA + vendor enforcement**
+
+Healthcare is now a serious wedge, but it still needs direct proof before it should outrank the best-established current motions.

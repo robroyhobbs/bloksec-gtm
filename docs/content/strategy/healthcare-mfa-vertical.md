@@ -1,231 +1,266 @@
 # Healthcare MFA: BlokSec's First Target Vertical
 
-> **Audience:** Internal — Sales Lead, CEO, Rob  
-> **Purpose:** Define healthcare/LTC as first target vertical with pitch, ICP, benefits, gaps, and GTM approach  
-> **Date:** March 2026  
+> **Audience:** Internal — Sales Lead, CEO, Rob
+> **Purpose:** Define the healthcare entry wedge, the target buyer, and the minimum proof needed to pursue it
+> **Date:** March 2026
 > **Status:** Strategy doc — not yet validated with prospects
 
 ---
 
-## Why Healthcare, Why Now
+## The market reality
 
-Two regulatory forces are converging to create **mandatory MFA demand** across healthcare — especially long-term care (LTC) and post-acute care (PAC):
+Healthcare is becoming a forced-buy MFA market.
 
-### 1. HIPAA Security Rule Update (2026–2027)
-- First major update in **20 years**
-- MFA moves from "addressable" (optional with documentation) to **mandatory**
-- Covers **all ePHI systems**: EHR/EMR, cloud, imaging, email, file shares, admin consoles, VPN, APIs
-- Applies to **all workforce members** — clinicians, support staff, administrators, business associates
-- Final rule expected mid-2026; enforcement ~early 2027 after 180-day grace period
-- **SMS-based MFA considered last-resort** — phishing-resistant methods (FIDO2, hardware tokens) preferred
+Three signals matter:
 
-### 2. PointClickCare Mandatory MFA (Active Now)
-- PointClickCare is the **dominant EHR platform in long-term and post-acute care**
-- MFA already mandatory for: remote users, IT admins, security/config access
-- Expanding to **all users** (mobile, eMAR, POC, API integrations) by 2026
-- 3-legged OAuth required for Marketplace partners by Feb 2026
-- LTC facilities using PointClickCare **must comply regardless of HIPAA timeline**
+- **HIPAA is moving toward mandatory MFA** for systems handling ePHI.
+- **PointClickCare is already enforcing MFA** across more of the long-term care workflow.
+- **The workflow is hostile to standard MFA** because workers share stations, move fast, wear gloves, and often do not carry managed phones.
 
-### The Market Opportunity
+That combination makes healthcare — especially long-term care — one of the clearest regulated wedges for BlokSec.
+
+---
+
+## Why BlokSec fits
+
+BlokSec is strongest when the customer has:
+
+- shared workstations
+- frontline users without reliable access to company phones
+- accountability problems caused by shared credentials
+- audit pressure tied to regulated workflows
+- lean IT teams that cannot support hardware-heavy rollouts
+
+That maps directly to long-term care, post-acute care, and smaller healthcare environments.
+
+---
+
+## The pitch
+
+> “Healthcare now needs MFA that works in the real world, not just on paper. Your staff share stations, move fast, wear gloves, and do not all carry company phones. BlokSec gives each worker a secure badge-based login that works on shared devices, strengthens accountability, and supports a cleaner audit trail without rolling out hardware tokens everywhere.”
+
+---
+
+## Why now
+
+### Regulatory and market convergence
+
+- HIPAA is moving from “addressable” MFA language toward a stronger mandatory posture.
+- PointClickCare is already creating operational urgency in long-term care by expanding MFA enforcement.
+- Many healthcare organizations still do not have a workable answer for floor staff and shared terminals.
+
+### Market signals
+
 | Metric | Value |
 |--------|-------|
 | US healthcare workers | ~18 million |
-| Average healthcare breach cost | $10M+ (IBM) |
-| Nurses sharing credentials | 57.5% (direct HIPAA violation) |
-| Healthcare IT leaders with passwordless | Only 7% |
-| Healthcare IT leaders calling MFA "mission-critical" | 85% |
-| Long-term care facilities in US | ~15,000+ |
+| Long-term care facilities in the US | ~15,000+ |
+| Nurses sharing credentials | 57.5% |
+| Healthcare IT leaders calling MFA mission-critical | 85% |
+| Healthcare IT leaders with passwordless already deployed | 7% |
 
-**The gap:** 85% say it's critical, 7% have done it, and now it's mandatory. That's a market in panic-buy mode.
-
----
-
-## The Problem We Solve
-
-Healthcare MFA is hard because **healthcare workflows are hostile to traditional MFA**:
-
-| Challenge | Why Standard MFA Fails | BlokSec Answer |
-|-----------|----------------------|----------------|
-| **Shared workstations** | Push MFA requires personal phone at every login; clinicians move between 5–10 stations per shift | BlokBadge: scan QR badge at any station — no phone needed |
-| **Gloves and PPE** | Can't type passwords or use fingerprint readers with surgical/exam gloves | BlokBadge: scan-only, no typing required |
-| **Speed pressure** | Login delays during patient care are unacceptable; MFA fatigue leads to workaround behavior | Level 0: tap-and-go in supervised areas (2 seconds); Level 1–4: badge + PIN |
-| **High turnover** | CNAs and seasonal staff cycle rapidly; device-based MFA provisioning takes weeks | BlokBadge-first provisioning: admin prints badge, worker is live same day |
-| **Credential sharing** | 57.5% of nurses share passwords — "everyone knows the password" culture | Passwordless eliminates shared credentials entirely; each badge is unique |
-| **Night/weekend shifts** | IT support unavailable; lockouts go unresolved for hours | Delegated badge management: charge nurse or shift supervisor resets PINs |
-| **Compliance audit trail** | Shared credentials make audit logs meaningless — who actually accessed the record? | Immutable per-user audit trail; every access tied to an individual |
+**The opportunity:** the market knows the problem is real, but most organizations still do not have a workable deployment model.
 
 ---
 
-## The Pitch (30-Second Version)
+## Who we target first
 
-> *"HIPAA now requires MFA on every system that touches patient records. Your nurses share workstations, wear gloves, and don't carry company phones. Traditional MFA doesn't work here. BlokSec gives every healthcare worker their own secure badge — scan it at any station, add a PIN, and they're in. No phone, no hardware token, no typing. Individual accountability, immutable audit trail, HIPAA-ready."*
+### Primary ICP
 
----
+**Long-term care and post-acute care operators**
 
-## Benefits Map — Healthcare Personas
+- skilled nursing
+- assisted living
+- memory care
+- rehab
+- home health agencies
 
-| Persona | Title Examples | What They Care About | BlokSec Benefit | Conversation Opener |
-|---------|---------------|---------------------|-----------------|-------------------|
-| **Clinical IT** | IT Director, CIO, CISO | PointClickCare MFA compliance, deployment complexity, help desk load | Badge-based MFA that works on shared stations; deploys in days not months; delegated resets reduce IT tickets | *"How are you planning to meet PointClickCare's MFA mandate for eMAR and POC users?"* |
-| **Nursing Leadership** | CNO, DON, Nurse Manager | Workflow disruption, staff resistance, speed of care | 2-second badge scan doesn't slow care; no app install; works with gloves | *"Your nurses move between 10 stations a shift. How many times a day are they typing passwords?"* |
-| **Compliance / Risk** | Compliance Officer, Privacy Officer, Risk Manager | HIPAA audit readiness, individual accountability, breach liability | Immutable audit logs per user; eliminates shared-credential violation; breach evidence is tamper-proof | *"If 57% of your staff share credentials, your audit trail isn't proving what you think it's proving."* |
-| **Operations / Admin** | Administrator, ED, COO | Onboarding speed, staff turnover cost, operational disruption | Same-day provisioning for new hires; badge reprint in 30 seconds for lost credentials; no hardware procurement | *"How long does it take to get a new CNA authenticated on all your systems today?"* |
-| **IT at MSP serving LTC** | vCIO, Service Desk Lead | Multi-facility management, support ticket volume, recurring revenue | White-label; centralized admin across facilities; badge delegation reduces tickets | *"How many password reset tickets do your LTC clients generate per month?"* |
+Best fit:
 
----
+- **50–500 staff per facility**
+- **2–20 location operators**
+- **PointClickCare-heavy environments**
+- **lean internal IT or outsourced IT**
+- **shared workstation workflows**
 
-## Ideal Customer Profile (ICP)
+### Secondary ICP
 
-### Primary: Long-Term Care / Post-Acute Care Facilities
+Smaller clinics, urgent care chains, and regional healthcare groups where the shared-device problem still exists but the sales cycle is less enterprise-heavy than large hospital systems.
 
-| Attribute | Target |
-|-----------|--------|
-| **Facility type** | Skilled nursing, assisted living, memory care, rehab, home health agencies |
-| **Size** | 50–500 staff per facility; multi-facility operators (2–20 locations) ideal |
-| **EHR platform** | PointClickCare (dominant in LTC), MatrixCare, American HealthTech |
-| **Current auth** | Passwords on shared workstations; possibly AD/LDAP; minimal or no MFA |
-| **Compliance pressure** | HIPAA MFA mandate 2026–2027; PointClickCare MFA enforcement now; state survey readiness |
-| **IT maturity** | Low — lean teams (1–3 IT staff) or outsourced to MSP/MSSP |
-| **Budget authority** | Administrator/ED (small), VP IT or CIO (multi-facility), MSP (outsourced) |
-| **Pain signal** | Recent survey finding, PointClickCare MFA enforcement email, breach at peer facility, cyber insurance questionnaire |
+### Disqualifiers for now
 
-### Secondary: Regional Healthcare / Clinics
-
-| Attribute | Target |
-|-----------|--------|
-| **Facility type** | Community hospitals, urgent care chains, dental/vision chains, outpatient clinics |
-| **Size** | 100–5,000 staff |
-| **EHR platform** | Epic, Cerner, athenahealth, NextGen |
-| **Current auth** | Mix of AD + Duo/Okta for office; shared passwords on clinical stations |
-| **Pain signal** | HIPAA audit finding, HITRUST certification requirement, clinical workflow complaints |
-
-### Disqualifiers (Don't Pursue Yet)
-- Large hospital systems (>5,000 staff) — enterprise sales cycle, existing IAM vendors entrenched
-- Organizations requiring SCIM provisioning — not yet shipped
-- Facilities needing mobile credential vault — not yet released
+- very large hospital systems with entrenched enterprise IAM stacks
+- buyers who require SCIM from day one
+- programs that depend on capabilities still outside the current claim set
 
 ---
 
-## Competitive Landscape in Healthcare
+## The problem we solve
 
-| Competitor | What They Offer | Their Weakness | Our Angle |
-|-----------|----------------|----------------|-----------|
-| **Duo (Cisco)** | Push MFA, strong MSP channel | Requires smartphone — nurses don't carry phones on the floor | *"Duo requires a phone. Your CNAs don't have one."* |
-| **Imprivata** | Tap-and-go badge auth, deep Epic integration | Enterprise-priced, requires proprietary readers at every station (~$200+/station) | *"Imprivata needs hardware at every workstation. BlokSec needs a printer."* |
-| **Microsoft Entra** | Bundled with M365, FIDO2 support | No native shared-workstation solution; FIDO2 keys expensive at scale | *"Entra doesn't solve for shared stations. BlokSec fills that gap."* |
-| **Okta** | Broad IAM platform | No frontline/shared-device MFA; phone-centric | *"Okta assumes every worker has a managed device."* |
-| **Badge-only proximity (HID, RF Ideas)** | Tap-to-login at workstation | Single factor — not MFA; doesn't meet HIPAA 2026 mandate alone | *"Proximity badges are single-factor. HIPAA now requires MFA. BlokBadge is MFA."* |
+Traditional MFA breaks down in healthcare for simple reasons:
 
-**Key positioning vs. Imprivata:** Imprivata is the incumbent in hospital badge auth but requires significant infrastructure investment (proprietary readers, virtual desktop agents, per-workstation hardware). BlokSec's QR-based approach works with any device that has a camera — no per-station hardware.
+- **shared workstations:** a phone prompt at every station change is not workable
+- **gloves and PPE:** typing and biometric assumptions fail
+- **speed pressure:** login friction becomes care disruption
+- **high turnover:** onboarding and re-issues have to happen fast
+- **shared credentials:** the workaround destroys accountability
 
----
+BlokSec answers that with:
 
-## What We Have Today (Repo-Verified)
-
-| Capability | Status | Healthcare Relevance |
-|-----------|--------|---------------------|
-| BlokBadge QR + PIN authentication | ✅ Shipped | Core shared-workstation MFA |
-| Level 0 passphrase (tap-and-go) | ✅ Shipped (ADR-0013) | Supervised kiosk/medication station access |
-| Immutable append-only audit logs | ✅ Shipped | HIPAA audit trail requirement |
-| Delegated badge management | ✅ Shipped (ADR-0009) | Charge nurse / shift supervisor resets |
-| BlokBadge-first provisioning | ✅ Shipped (ADR-0010) | Same-day staff onboarding |
-| Bulk badge operations | ✅ Shipped (ADR-0007) | Multi-facility batch provisioning |
-| Directory sync (MS Graph, Google) | ✅ Shipped | Sync from AD/Azure AD |
-| SAML 2.0 + OIDC + WS-Federation | ✅ Shipped | EHR federation (PointClickCare supports SAML) |
-| White-label / branding | ✅ Shipped | MSP and multi-facility custom branding |
-| Geo-tracking in audit logs | ✅ Shipped | Multi-facility compliance reporting |
-| Split-key cryptography | ✅ Shipped | Badge theft alone is useless |
-| App templates marketplace | ✅ Shipped | Faster EHR integration setup |
+- badge-based authentication for shared devices
+- optional PIN levels depending on the environment
+- Level 0 flows for supervised kiosk-style access
+- delegated badge management for faster recovery
+- immutable audit records tied to a real individual
 
 ---
 
-## What We Need to Build / Prove
+## The buyer story
 
-### Must-Have (Before First Healthcare Sale)
+### Clinical IT
 
-| Gap | Why It Matters | Effort Estimate | Owner |
-|-----|---------------|-----------------|-------|
-| **PointClickCare SAML integration validation** | PCC is the dominant LTC platform; must prove federation works | Test environment + documentation | Engineering |
-| **Healthcare-specific demo environment** | Can't sell without showing badge → EHR login flow | Preconfigured tenant with simulated EHR | Engineering + Sales |
-| **HIPAA compliance mapping document** | Buyers need a checklist showing how BlokSec maps to each HIPAA control | Marketing/compliance artifact | Product Marketing |
-| **BAA (Business Associate Agreement) template** | Required before any healthcare org shares ePHI access | Legal artifact | Legal / CEO |
-| **1 LTC pilot / proof-of-concept** | No healthcare case study = no credibility; need a reference-able deployment | 4–6 week POC (Interra model) | Sales + Engineering |
+This buyer cares about PointClickCare readiness, rollout complexity, and support burden.
 
-### Should-Have (Before Scaling)
+**Opening question:**
+*How are you planning to meet PointClickCare MFA requirements for workers on shared stations?*
 
-| Gap | Why It Matters | Effort Estimate |
-|-----|---------------|-----------------|
-| **Healthcare buyer persona content** (CNO, DON, Compliance Officer) | Sales needs persona-specific decks and one-pagers | Product Marketing |
-| **"HIPAA MFA 2026" SEO content** | High-intent keyword identified in market research; we should own this page | Content Marketing |
-| **ROI calculator for healthcare** | Password reset cost + breach risk + onboarding speed | Product Marketing |
-| **MSP healthcare outreach sequence** | MSPs serving LTC are the fastest channel | Sales / Marketing |
-| **EHR integration matrix** | Which EHRs support SAML/OIDC and what's the federation path | Engineering / Partnerships |
+### Nursing leadership
 
-### Nice-to-Have (Future)
+This buyer cares about speed, adoption, and disruption to care workflows.
 
-| Gap | Why It Matters |
-|-----|---------------|
-| Epic / Cerner integration validation | Opens hospital segment (secondary ICP) |
-| HITRUST certification or mapping | Some healthcare buyers require this |
-| State survey readiness guide | LTC facilities face annual state surveys |
+**Opening question:**
+*How many times a shift are nurses or aides still typing credentials at shared stations?*
 
----
+### Compliance and risk
 
-## Go-to-Market Approach
+This buyer cares about individual accountability and defensible audit evidence.
 
-### Phase 1: Validate (Months 1–2)
-**Goal:** Prove BlokSec works in one LTC facility
+**Opening question:**
+*If staff still share credentials, what is your audit trail actually proving?*
 
-1. **Validate PointClickCare SAML federation** in a test environment
-2. **Identify 2–3 LTC facilities** through existing network, MSP partners, or cold outreach to PointClickCare-using facilities that received MFA enforcement notices
-3. **Run a 4-week POC** at one facility (Interra model: Week 1 tenant setup, Week 2 app federation, Week 3 staff onboarding, Week 4 exit criteria)
-4. **Capture metrics:** Login speed, badge provisioning time, staff feedback, audit log export for compliance review
-5. **Produce first case study** (even anonymized)
+### Operations
 
-### Phase 2: Package (Months 2–3)
-**Goal:** Create repeatable healthcare sales motion
+This buyer cares about onboarding speed and recovery when credentials are lost or forgotten.
 
-1. **HIPAA compliance mapping** document published
-2. **Healthcare demo environment** operational
-3. **BAA template** ready
-4. **Healthcare landing page / one-pager** created
-5. **"HIPAA MFA 2026 Guide"** published (SEO play)
-6. **Pricing validated** for healthcare segment ($3–5/user/mo positions below Imprivata)
-
-### Phase 3: Scale (Months 3–6)
-**Goal:** Repeatable revenue from LTC vertical
-
-1. **MSP channel activation** — identify MSPs/MSSPs serving LTC facilities
-2. **PointClickCare Marketplace exploration** — can BlokSec be listed as a cybersecurity partner?
-3. **Conference presence** — HIMSS, AHCA/NCAL, LeadingAge (identify which events)
-4. **Expand to secondary ICP** — regional hospitals, clinic chains, dental/vision
+**Opening question:**
+*How long does it take to get a new or rotating worker fully authenticated today?*
 
 ---
 
-## The Narrative for Stakeholder Conversations
+## Competitive wedge
+
+We do not need a long competitor matrix here. We need one clear posture.
+
+### The real healthcare comparison
+
+**Imprivata** is the closest conceptual competitor because it is known for badge-based clinical access.
+
+The BlokSec angle is simpler:
+
+- Imprivata is associated with deeper infrastructure and workstation-level reader assumptions
+- BlokSec's QR-based approach is lighter-weight and easier to picture in smaller care environments
+
+### The phone-based comparison
+
+**Duo, Okta, and similar push-MFA models** still assume a phone-centric workflow. That is the wrong assumption for many floor staff and shared-device environments.
+
+### The platform comparison
+
+**Entra** still matters in the environment, but not as the full answer for shared clinical workflows. BlokSec should be framed as the layer that closes the frontline gap.
+
+---
+
+## What we already have
+
+Repo-verified strengths that matter for healthcare:
+
+- BlokBadge QR + PIN authentication
+- Level 0 passphrase for supervised environments
+- immutable append-only audit logs
+- delegated badge management
+- BlokBadge-first provisioning
+- bulk badge operations
+- directory sync
+- OIDC, SAML 2.0, and WS-Federation support
+
+This is enough to justify the wedge. It is not yet enough to claim healthcare repeatability at scale.
+
+---
+
+## What must be true before we push hard
+
+Three items matter most:
+
+1. **PointClickCare federation validation**
+   This is the blocking proof point for long-term care.
+
+2. **A healthcare demo or pilot environment**
+   The team needs a believable shared-station story, not just a generic platform story.
+
+3. **A first pilot and case study**
+   One LTC proof point is worth more than ten speculative healthcare pages.
+
+Supporting needs:
+
+- HIPAA mapping collateral
+- BAA readiness
+- healthcare persona and outreach assets
+
+---
+
+## Go-to-market sequence
+
+### Phase 1: Validate
+
+Prove the motion in one LTC environment:
+
+- validate PointClickCare federation
+- run one pilot
+- capture login speed, onboarding speed, and audit feedback
+
+### Phase 2: Package
+
+Turn the proof into a repeatable sales motion:
+
+- one-pager
+- HIPAA mapping
+- healthcare demo
+- SEO content around healthcare MFA
+
+### Phase 3: Scale
+
+Expand through the best channels:
+
+- MSPs serving LTC and post-acute care
+- partner conversations around PointClickCare-heavy accounts
+- secondary expansion into clinics and regional providers
+
+---
+
+## Stakeholder version
 
 ### For the CEO
-> "Healthcare is about to become a forced-buy market. HIPAA is mandating MFA for the first time in 20 years, and PointClickCare — the dominant platform in long-term care — is enforcing it now. The entire LTC industry needs MFA that works on shared workstations with workers who don't have phones. That's exactly what BlokBadge does. We have the product. We need one pilot to prove it, and then we have a vertical with 15,000+ facilities and a regulatory deadline."
 
-### For the Sales Lead
-> "The opening question for every LTC facility is: 'How are you planning to meet the PointClickCare MFA mandate for your floor staff?' Most of them don't have an answer. Duo requires phones. Imprivata requires hardware at every station. We need to validate our SAML federation with PointClickCare, run one pilot, and then we have a repeatable conversation with a clear compliance trigger."
+Healthcare is attractive because the demand is being forced by regulation and vendor enforcement, not by abstract security education.
 
-### For the Team
-> "Healthcare is our first vertical where the buyer doesn't have a choice — MFA is mandatory. Our job in Q2 is to prove we can federate with PointClickCare, run a pilot at one LTC facility, and produce a case study. Everything else — SEO, MSP channel, conference presence — follows from that proof."
+### For the sales lead
 
----
+The wedge is simple: PointClickCare urgency plus a workflow that phone-based MFA handles poorly.
 
-## Risk and Honest Assessment
+### For the team
 
-| Risk | Mitigation |
-|------|-----------|
-| No healthcare customers yet | POC-first approach; don't market until proven |
-| No PointClickCare integration validation | Technical validation is first priority — must confirm SAML works |
-| Imprivata is entrenched in hospitals | We're not targeting hospitals initially — LTC facilities are underserved |
-| HIPAA timeline could slip | PointClickCare mandate is independent — enforcement is happening now |
-| No BAA in place | Must be created before any pilot involving real ePHI |
-| SCIM not shipped | LTC facilities are small enough for manual/directory-sync provisioning |
+Do not confuse opportunity with readiness. We have a real wedge, but we still need federation proof and a pilot.
 
 ---
 
-*This document defines healthcare as BlokSec's first target vertical based on the convergence of HIPAA MFA mandates and PointClickCare enforcement. All product claims are repo-verified. Market data sourced from HIPAA rulemaking, PointClickCare documentation, and industry research. Update as validation progresses.*
+## Summary
+
+Healthcare should be treated as a **high-potential first regulated vertical**, with long-term care as the sharpest entry point.
+
+The case is strong because:
+
+- the urgency is real
+- the workflow fit is strong
+- the competitive angle is clear
+
+The next step is not more writing. It is proof.
