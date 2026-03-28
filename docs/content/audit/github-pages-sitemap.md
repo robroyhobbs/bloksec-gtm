@@ -55,6 +55,7 @@ Priority pages:
 - strategy framework
 - frontline passwordless market research
 - AI tooling x GTM funnel matrix
+- Benefits, ROI & switching narrative (stakeholder discussion doc)
 - market, compliance, product, and competitor context
 
 Primary outcome:
