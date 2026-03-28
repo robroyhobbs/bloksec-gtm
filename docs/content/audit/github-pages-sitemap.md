@@ -71,6 +71,7 @@ Priority assets:
 ## Audit
 Priority pages:
 - research revisit
+- GTM vs product capability matrix
 - site audit summary
 - GitHub Pages sitemap
 - next actions

@@ -1,5 +1,10 @@
 # Immediate Next Actions
 
+## 0. Use the product-truth matrix before new messaging work
+- Review `gtm-vs-product-capability-matrix-2026-03.md` before writing new homepage, partner, or industry copy.
+- Treat MSP scale-readiness, named integrations, and enterprise-readiness as qualification-heavy topics until the proof set is tightened.
+- Pull stronger proof from the product repo into admin, audit, BlokSafe, and provisioning narratives.
+
 ## 1. Fix the live site first
 - Repair broken or generic conversion pages (`demo`, `free-trial`, `contact`, `legal` flow overlap).
 - Fix the `BlokBadge` copy error.
