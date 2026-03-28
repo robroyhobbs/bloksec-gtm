@@ -56,6 +56,7 @@ Priority pages:
 - frontline passwordless market research
 - AI tooling x GTM funnel matrix
 - Benefits, ROI & switching narrative (stakeholder discussion doc)
+- Healthcare MFA vertical strategy (first target vertical — HIPAA + PointClickCare)
 - market, compliance, product, and competitor context
 
 Primary outcome:
