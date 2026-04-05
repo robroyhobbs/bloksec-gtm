@@ -35,6 +35,18 @@ That maps directly to long-term care, post-acute care, and smaller healthcare en
 
 ---
 
+## Executive takeaway
+
+Healthcare is attractive because the buying pressure is becoming external, not optional.
+
+- **HIPAA pressure is rising**
+- **PointClickCare is increasing MFA urgency inside LTC**
+- **the default phone-centric MFA model fits poorly on shared stations**
+
+That combination makes long-term care the sharpest regulated wedge for BlokSec today.
+
+---
+
 ## The pitch
 
 > “Healthcare now needs MFA that works in the real world, not just on paper. Your staff share stations, move fast, wear gloves, and do not all carry company phones. BlokSec gives each worker a secure badge-based login that works on shared devices, strengthens accountability, and supports a cleaner audit trail without rolling out hardware tokens everywhere.”
@@ -64,6 +76,71 @@ That maps directly to long-term care, post-acute care, and smaller healthcare en
 | Healthcare IT leaders with passwordless already deployed | 7% |
 
 **The opportunity:** the market knows the problem is real, but most organizations still do not have a workable deployment model.
+
+---
+
+## What PointClickCare changes
+
+Publicly, PointClickCare appears to be taking a very specific security posture:
+
+- native **TOTP-style MFA** is now mandatory for many users
+- there is **no clear public named MFA / IAM partner** for long-term care customers
+- **SSO and native MFA are separate paths**, which means customers using SSO push authentication responsibility upstream to their IdP
+- IP allow-listing is part of the broader control model
+
+This sharpens the wedge. PointClickCare is increasing authentication urgency, but the public model still appears to assume a fairly standard personal-device MFA experience. That is exactly where LTC workflows get messy.
+
+### Strategic implication
+
+For BlokSec, the PointClickCare moment is not just “MFA is now mandatory.”
+
+It is “MFA is now mandatory **in a workflow where the default model fits poorly**.”
+
+That gives BlokSec two plausible positions:
+
+1. **Operator-side solution** — help LTC organizations meet PointClickCare-driven MFA pressure in shared-station environments more cleanly than phone-centric methods.
+2. **Platform / embedded IAM collaboration** — explore whether PointClickCare could eventually benefit from a stronger frontline IAM layer for its own LTC customer base and possibly for parts of its own workforce environment.
+
+The first is the near-term motion. The second is a strategic hypothesis, not a current claim.
+
+---
+
+## The PointClickCare risk frame
+
+This is the clearest external framing surfaced by the recent research.
+
+### From PointClickCare's perspective
+
+Publicly, the current posture appears to create five categories of risk:
+
+1. **Lowest-common-denominator MFA**
+   Native TOTP is adequate as a baseline control, but it leaves the workflow burden on the facility.
+
+2. **SSO / MFA split**
+   If SSO customers bypass native MFA, PCC is effectively pushing authentication quality upstream without visibly standardizing the result.
+
+3. **Limited centralized assurance**
+   App-agnostic TOTP gives less visibility into enrollment quality, device state, and lifecycle control than a more managed IAM model.
+
+4. **Reputational and regulatory exposure**
+   If authentication is weak or workaround-heavy in LTC environments, PCC still sits at the center of the workflow when something goes wrong.
+
+5. **Missed ecosystem opportunity**
+   A weakly defined IAM stance leaves room for another vendor to define the security standard around PCC-heavy workflows.
+
+### From the LTC operator's perspective
+
+The practical risks are even clearer:
+
+- shared workstations do not pair naturally with personal authenticator apps
+- high turnover makes deprovisioning and recovery more error-prone
+- smaller operators often lack the IAM depth to make SSO the clean answer
+- generic MFA can create workaround behavior that is worse than the intended control
+- audit and compliance liability still sits with the facility
+
+This is the cleanest way to frame the opportunity:
+
+> The gap is not whether MFA exists. The gap is whether MFA actually works in the LTC environment without creating unsafe or non-compliant workarounds.
 
 ---
 
@@ -153,28 +230,72 @@ This buyer cares about onboarding speed and recovery when credentials are lost o
 
 ## Competitive wedge
 
-We do not need a long competitor matrix here. We need one clear posture.
+We do not need a giant matrix in the field. We need a clear competitive posture.
 
-### The real healthcare comparison
+### 1. Traditional MFA vendors
 
-**Imprivata** is the closest conceptual competitor because it is known for badge-based clinical access.
+**Duo, Okta, and Entra** mostly frame the market around identity sprawl, phishing, and zero-trust access.
 
-The BlokSec angle is simpler:
+- Their posture is valid for enterprise IAM.
+- Their default operating assumption is still closer to **managed users, phones, and conventional workforce patterns**.
+- That is not the strongest fit for LTC floors built around shared stations and rotating staff.
 
-- Imprivata is associated with deeper infrastructure and workstation-level reader assumptions
-- BlokSec's QR-based approach is lighter-weight and easier to picture in smaller care environments
+BlokSec should not try to out-enterprise them on generic IAM language. The better line is:
 
-### The phone-based comparison
+> Traditional MFA vendors secure the identity problem broadly. BlokSec solves the specific frontline shared-device problem they handle poorly.
 
-**Duo, Okta, and similar push-MFA models** still assume a phone-centric workflow. That is the wrong assumption for many floor staff and shared-device environments.
+### 2. Imprivata
 
-### The platform comparison
+**Imprivata** is still the closest conceptual healthcare comparison.
 
-**Entra** still matters in the environment, but not as the full answer for shared clinical workflows. BlokSec should be framed as the layer that closes the frontline gap.
+Its strengths are real:
+
+- purpose-built healthcare positioning
+- deep clinical workflow framing
+- strong EHR and compliance posture
+- badge- and proximity-based access with substantial hospital credibility
+
+The BlokSec angle remains:
+
+- lighter-weight story for smaller care environments
+- no immediate requirement for readers, docks, or deeper infrastructure assumptions
+- easier to position in LTC operators that need frontline coverage without buying a large hospital-style access platform
+
+### 3. Twosense
+
+**Twosense** is not a classic MFA vendor. Its strongest argument is continuous behavioral authentication.
+
+That matters because it shows another way the category is moving:
+
+- away from point-in-time MFA
+- toward lower-friction and more contextual identity
+
+For BlokSec, the takeaway is not “we are Twosense.” It is:
+
+- the market increasingly agrees that **workflow friction is a core identity problem**
+- BlokSec can credibly participate in that conversation from the frontline, shared-device angle
+
+### 4. LTC-focused MSPs
+
+This research clarified something useful:
+
+- **Prelude, RSN, Meriplex, and similar firms are not the main technology competitors**
+- they are better understood as **potential routes to market**, because they already serve senior living and LTC operators with managed security and IT services
+
+That means the healthcare motion should keep two tracks open:
+
+1. direct operator wedge
+2. channel / reseller / integration wedge through LTC-focused MSPs
+
+### The practical posture
+
+The healthcare pitch should stay narrow:
+
+**PointClickCare urgency + shared stations + no-phone workflows + auditability + lighter deployment**
 
 ---
 
-## Why a healthcare company would choose BlokSec
+## Why a healthcare buyer would choose BlokSec
 
 These reasons need to stay tied to what we can actually support today.
 
@@ -188,7 +309,7 @@ Healthcare buyers do not just need MFA. They need MFA that works when:
 
 That is where BlokBadge is strongest.
 
-### 2. The rollout can be lighter
+### 2. The rollout is lighter
 
 BlokSec is easier to picture in smaller care environments because the story is lighter-weight:
 
@@ -208,7 +329,7 @@ BlokSec gives a cleaner story around:
 - badge lifecycle control
 - delegated recovery for operational teams
 
-### 4. The economics are easier to explain
+### 4. The business case is easier to explain
 
 The near-term business case is not abstract AI-security language. It is:
 
@@ -221,9 +342,61 @@ The near-term business case is not abstract AI-security language. It is:
 
 Most competitors can talk about MFA. Fewer can talk credibly about **shared clinical workflows**.
 
-That is why the healthcare pitch should stay narrow and practical:
+That is why the healthcare pitch should stay narrow:
 
 **shared stations + no-phone workflows + auditability + lighter deployment**
+
+---
+
+## Commercial and pricing hypotheses
+
+The latest sales feedback improves the commercial framing in three ways.
+
+### 1. The business case should combine risk reduction and revenue protection
+
+The near-term LTC message should not be framed only as:
+
+- “better security”
+
+It should be framed as:
+
+- **better risk management / avoidance**
+- **less workflow disruption**
+- **less operational drag**
+- **less chance that access friction affects staff productivity, resident service, or occupancy-supporting operations**
+
+That is a stronger executive story than generic cybersecurity language alone.
+
+### 2. LTC pricing may need to anchor on beds, not users
+
+This is still a hypothesis, but it is worth testing early.
+
+Long-term care buyers may respond better to pricing framed around:
+
+- **number of beds**
+
+rather than:
+
+- named users
+- total identities
+
+Why this may work better:
+
+- beds are easier for operators to understand and budget against
+- staffing levels shift with turnover, casual labor, and agency usage
+- user-based pricing can feel punitive in high-turnover environments
+- bed-based pricing aligns more naturally with facility economics and operator planning
+
+We should not commit to this publicly yet, but we should test it in discovery immediately.
+
+### 3. Strategic PCC collaboration is worth exploring carefully
+
+There is a credible strategic hypothesis that BlokSec could matter to PointClickCare beyond a single-facility sale:
+
+- PCC may eventually need a stronger frontline IAM story for its LTC ecosystem
+- BlokSec could potentially fit as an operator-side overlay or longer-term embedded / partnership layer
+
+This is not current proof, but it is worth treating as a serious strategic question because it creates upside beyond one operator at a time.
 
 ---
 
@@ -255,13 +428,43 @@ Three items matter most:
    The team needs a believable shared-station story, not just a generic platform story.
 
 3. **A first pilot and case study**
-   One LTC proof point is worth more than ten speculative healthcare pages.
+   One LTC proof point is worth more than ten more pages.
 
 Supporting needs:
 
 - HIPAA mapping collateral
 - BAA readiness
 - healthcare persona and outreach assets
+
+---
+
+## Discovery questions for PCC and early operator conversations
+
+These are the most useful questions surfaced by the new sales input and external research.
+
+### Questions for a PointClickCare contact
+
+1. How does PCC currently think about the gap between native TOTP MFA and real shared-station workflows in LTC?
+2. Does PCC see authentication as a facility responsibility, an IdP responsibility, or an ecosystem opportunity?
+3. How often do customers raise workflow friction, support burden, or user adoption concerns around native MFA?
+4. Are there classes of PCC customers where SSO adoption is low because the IT stack is not mature enough?
+5. Has PCC evaluated a stronger frontline IAM or shared-device authentication partner strategy?
+6. Would PCC view a lighter-weight IAM layer for LTC as complementary, competitive, or channel-partner material?
+
+### Questions for LTC operators
+
+1. Where does authentication friction actually hurt most today: nursing stations, admin stations, remote access, onboarding, or audits?
+2. Are staff carrying personal phones consistently enough for native TOTP to work well?
+3. What happens when a staff member leaves, loses a device, or needs urgent re-access?
+4. Is the bigger pain workflow disruption, security review, compliance exposure, or help desk burden?
+5. Would pricing make more sense to you per user, per facility, or per bed?
+
+These questions matter because they tell us which wedge actually closes:
+
+- PointClickCare urgency
+- workflow fit
+- auditability
+- or operator economics
 
 ---
 
@@ -281,7 +484,9 @@ We should treat healthcare as a proof-led motion. Before scaling the story, we n
 - test the story with **clinical IT**, **nursing leadership**, and **compliance** buyers
 - validate whether the strongest wedge is really **PointClickCare urgency**, **shared stations**, or **auditability**
 - confirm that the **Imprivata comparison** resonates in LTC, not just in hospital environments
+- validate whether buyers respond more to **risk reduction**, **workflow fit**, or **revenue / operations protection**
 - learn where the real objection shows up first: workflow change, trust, security review, or budget
+- test whether **bed-based pricing** is more intuitive than user-based pricing
 
 ### 3. Operational validation
 
@@ -290,7 +495,7 @@ We should treat healthcare as a proof-led motion. Before scaling the story, we n
 - measure **badge re-issue / recovery time**
 - measure whether delegated management actually reduces support dependency
 
-These metrics matter more than abstract ROI estimates.
+These metrics matter more than abstract ROI language.
 
 ### 4. Trust and compliance validation
 
@@ -311,6 +516,7 @@ If we want this to become a real vertical, we need a tighter content package aro
 - **pilot case study** — even anonymized at first
 - **workflow diagram** — badge-to-shared-station flow for LTC staff
 - **security / compliance mapping** — how BlokSec supports MFA, auditability, and accountability requirements
+- **PCC architecture note** — native MFA, SSO split, and where BlokSec fits
 
 ### Required buyer-facing content
 
@@ -323,8 +529,11 @@ If we want this to become a real vertical, we need a tighter content package aro
 
 - **talk track** for PointClickCare-triggered outreach
 - **competitive battlecard** for Imprivata
+- **vendor landscape brief** covering Duo, Entra, Imprivata, Twosense, and LTC-focused MSPs
 - **objection handling** for “we already have Duo/Entra” and “we cannot disrupt clinical workflow”
 - **pilot offer outline** with scope, success criteria, and expected buyer effort
+- **discovery guide** for PCC and LTC operator conversations
+- **pricing hypothesis memo** covering per-user vs per-bed framing
 
 ### Required trust content
 
@@ -337,7 +546,7 @@ If we want this to become a real vertical, we need a tighter content package aro
 
 ## Ranked execution plan
 
-This is the practical order of operations.
+This is the order of operations.
 
 ### Tier 1 — Must have before outreach
 
@@ -347,8 +556,9 @@ These are the minimum items needed before we push the healthcare story hard:
 2. **clear healthcare talk track**
 3. **simple healthcare one-pager**
 4. **proof register for claims**
+5. **discovery questions for PCC and LTC operators**
 
-Without these, we are still selling an idea more than a wedge.
+Without these, we are still selling an idea more than a motion.
 
 ### Tier 2 — Must have before pilot
 
@@ -359,6 +569,7 @@ These are required to run a real healthcare evaluation cleanly:
 3. **security / HIPAA mapping**
 4. **BAA / legal readiness**
 5. **pilot offer with success criteria**
+6. **pricing model hypothesis**
 
 Without these, the first pilot will feel improvised.
 
@@ -373,7 +584,7 @@ These are needed once the first pilot proves the motion:
 5. **healthcare landing page**
 6. **MSP outreach sequence for LTC-focused providers**
 
-Without these, the motion may work once but remain hard to repeat.
+Without these, the motion may work once but stay hard to repeat.
 
 ### Tier 4 — Nice to have after proof
 
@@ -405,6 +616,7 @@ Turn the proof into a repeatable sales motion:
 - one-pager
 - HIPAA mapping
 - healthcare demo
+- pricing hypothesis
 - SEO content around healthcare MFA
 
 ### Phase 3: Scale
@@ -413,6 +625,7 @@ Expand through the best channels:
 
 - MSPs serving LTC and post-acute care
 - partner conversations around PointClickCare-heavy accounts
+- strategic exploration of a PCC-adjacent or embedded IAM angle if discovery supports it
 - secondary expansion into clinics and regional providers
 
 ---
@@ -423,9 +636,17 @@ Expand through the best channels:
 
 Healthcare is attractive because the demand is being forced by regulation and vendor enforcement, not by abstract security education.
 
+The bigger upside is not just selling MFA to one operator at a time. It may be defining a stronger frontline IAM layer around PointClickCare-heavy LTC workflows.
+
 ### For the sales lead
 
 The wedge is simple: PointClickCare urgency plus a workflow that phone-based MFA handles poorly.
+
+The best early conversations should test three things:
+
+- whether the pain is strong enough to force action now
+- whether bed-based pricing resonates more than user-based pricing
+- whether PCC itself sees value in a stronger IAM layer for LTC
 
 ### For the team
 
@@ -443,4 +664,4 @@ The case is strong because:
 - the workflow fit is strong
 - the competitive angle is clear
 
-The next step is not more writing. It is proof.
+The next step is not more writing. It is proof, packaging, and live conversations.
